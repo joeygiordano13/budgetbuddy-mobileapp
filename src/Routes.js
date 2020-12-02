@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, ActivityIndicator } from 'react-native';
-import { Center } from './Center';
+import { Center } from './components/Center';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from './AuthProvider';
 import { AppTabs } from './AppTabs';
