@@ -1,22 +1,22 @@
 import React, { useContext } from 'react';
 import { Center } from '../components/Center';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, SafeAreaView } from 'react-native';
 import { AuthContext } from '../AuthProvider';
 
 const Settings = () => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Center>
                 <Text style={styles.medium}>Change Account Information</Text>
                 <Text style={styles.medium}>Change Avatar</Text>
             </Center>
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-       paddingTop: 23
+       flex: 1
     },
     input: {
        margin: 15,

@@ -1,30 +1,30 @@
 import React, { useContext } from 'react';
 import { Center } from '../components/Center';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { SafeAreaView, Text, Button, StyleSheet } from 'react-native';
 import { AuthContext } from '../AuthProvider';
 import { LogoutButton } from '../components/LogoutButton';
 
 const Home = () => {
     //const {logout} = useContext(AuthContext);
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Center>
                 <Text style={styles.large}>Dashboard</Text>
                 <LogoutButton/>
             </Center>
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-       paddingTop: 23
+       flex: 1
     },
     input: {
-       margin: 15,
+       margin: 25,
        height: 40,
        borderColor: '#7a42f4',
-       borderWidth: 1
+       borderWidth: 10
     },
     submitButton: {
        backgroundColor: '#7a42f4',

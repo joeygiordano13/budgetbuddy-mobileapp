@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from "./AuthProvider";
 import { Center } from "./components/Center";
-import { View, Button, Text, Image, ImageBackground, StyleSheet, TextInput } from "react-native";
+import { Button, Text, SafeAreaView, ImageBackground, StyleSheet, TextInput } from "react-native";
 
 
 const Stack = createStackNavigator();
@@ -12,56 +12,88 @@ function Login({ navigation }) {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = React.useState('');
   const [pass, setPass] = React.useState('');
+  //const [loading, setLoading] = useState(false);
+  //const [errortext, setErrortext] = useState('');
   //const image = {require('../assets/bubblebackground.png')};
 
-  return (
-    <View style={styles.container}>
-      <ImageBackground
+  <ImageBackground
           style={styles.backgroundImage} 
           source={require('../assets/bubblebackground.png')}
         />
-      <Center>
-        <Text style={styles.large}>Login Form</Text>
-        <TextInput style={styles.input}
-          onChangeText={em => setEmail(em)}
-          placeholder="Email"
-          value={email}>
-        </TextInput>
-        <TextInput style={styles.input}
-          onChangeText={pw => setPass(pw)}
-          placeholder="Password"
-          value={pass}>
-        </TextInput>
-        <Button style={styles.submitButton}
-          title="Submit"
-          onPress={() => {
-            login();
-          }}
-        />
-        <Button style={styles.medium}
-          title="go to register"
-          onPress={() => {
-            navigation.navigate("Register");
-          }}
-        />
-        <Text style={styles.medium}>Forgot Password? Click here.</Text>
-      </Center>
-    </View>
+  return (
+    <ImageBackground 
+    style={styles.backgroundImage} 
+    source={require('../assets/bubblebackground.png')}>
+      <SafeAreaView style={styles.container}>
+        <Center>
+          <Text style={styles.large}>Login Form</Text>
+          <TextInput style={styles.input}
+            onChangeText={em => setEmail(em)}
+            placeholder="Email"
+            value={email}>
+          </TextInput>
+          <TextInput style={styles.input}
+            onChangeText={pw => setPass(pw)}
+            placeholder="Password"
+            value={pass}>
+          </TextInput>
+          <Button style={styles.submitButton}
+            title="Submit"
+            onPress={() => {
+              login();
+            }}
+          />
+          <Button style={styles.submitButton}
+            title="go to register"
+            onPress={() => {
+              navigation.navigate("Register");
+            }}
+          />
+          <Text style={styles.medium}>Forgot Password? Click here.</Text>
+        </Center>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 function Register({ navigation }) {
+  // Register usestates
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState('');
+
   return (
-    <Center>
-      <Text style={styles.large}>Register Form</Text>
-      <Button style={styles.submitButton}
-        title="go to login"
-        onPress={() => {
-          navigation.navigate("Login");
-          // navigation.goBack()
-        }}
-      />
-    </Center>
+    <ImageBackground 
+    style={styles.backgroundImage} 
+    source={require('../assets/bubblebackground.png')}>
+      <SafeAreaView style={styles.container}>
+        <Center>
+          <Text style={styles.large}>Register Form</Text>
+          <TextInput style={styles.input}
+            onChangeText={u => setUsername(u)}
+            placeholder="Username"
+            value={username}></TextInput>
+          <TextInput style={styles.input}
+            onChangeText={em => setEmail(em)}
+            placeholder="Email"
+            value={email}></TextInput>
+          <TextInput style={styles.input}
+            onChangeText={pw => setPassword(pw)}
+            placeholder="Password"
+            value={password}></TextInput>
+          <TextInput style={styles.input}
+            onChangeText={pw => setPassword(pw)}
+            placeholder="Confirm Password"
+            value={password}></TextInput>
+          <Button style={styles.submitButton}
+            title="go to login"
+            onPress={() => {
+              navigation.navigate("Login");
+            // navigation.goBack()
+          }}/>
+        </Center>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
@@ -88,22 +120,24 @@ export const AuthStack = ({}) => {
 
 const styles = StyleSheet.create({
   container: {
-     paddingTop: 150
+    flex: 1
   },
   input: {
-     margin: 15,
-     height: 40,
-     borderColor: '#7a42f4',
-     borderWidth: 1
+    margin: 1,
+    height: 40,
+    width: 150,
+    backgroundColor: 'white',
+    borderColor: 'white',
+    borderWidth: 1,
   },
   submitButton: {
-     backgroundColor: '#7a42f4',
-     padding: 10,
-     margin: 15,
-     height: 40,
+    backgroundColor: '#7a42f4',
+    padding: 10,
+    margin: 25,
+    height: 40,
   },
   submitButtonText: {
-     color: 'white'
+    color: 'white'
   },
   large: {
     fontSize: 28

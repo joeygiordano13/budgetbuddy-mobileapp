@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-//import { SearchBar } from 'react-native-elements';
+import { SearchBar } from 'react-native-elements';
+import { View } from 'react-native';
 
-class UserSearchBar extends React.Component {
+export default class UserSearchBar extends React.Component {
     state = {
         search: '',
     };
-
     updateSearch = (search) => { 
         this.setState({ search });
     };
@@ -14,13 +14,13 @@ class UserSearchBar extends React.Component {
         const { search } = this.state;
     
         return (
-            <SearchBar
-                placeholder="Search for Budget Buddies..."
-                onChangeText={this.updateSearch}
-                value={search}
-            />
+            <View>
+                <SearchBar
+                    placeholder="Search for Budget Buddies..."
+                    onChangeText={this.updateSearch}
+                    value={search}
+                />
+            </View>
         );
     }
-};
-
-export default UserSearchBar;
+}

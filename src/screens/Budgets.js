@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Center } from '../components/Center';
-import { Text, View, Button, StyleSheet } from 'react-native';
+import { Text, View, Button, StyleSheet, SafeAreaView, TextInput } from 'react-native';
 import { AuthContext } from '../AuthProvider';
-import { TextInput } from 'react-native-gesture-handler';
+//import { TextInput } from 'react-native-gesture-handler';
 import AddBudget from '../components/AddBudget';
 import { LogoutButton } from '../components/LogoutButton';
 
@@ -12,8 +12,9 @@ const Budgets = () => {
     const [startingAmount, setAmount] = React.useState('');
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Center>
+                <Text style={styles.large}>Add Budgets</Text>
                 <TextInput style={styles.input}
                     onChangeText={name => setBudgetName(name)}
                     placeholder="budget name"
@@ -35,7 +36,7 @@ const Budgets = () => {
                 </Button>
                 <LogoutButton/>
             </Center>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -43,7 +44,7 @@ export default Budgets;
 
 const styles = StyleSheet.create({
     container: {
-       paddingTop: 23
+       flex: 1
     },
     input: {
        margin: 5,
@@ -56,5 +57,11 @@ const styles = StyleSheet.create({
        padding: 5,
        margin: 5,
        height: 40,
+    },
+    large: {
+       fontSize: 28
+    },
+    medium: {
+       fontSize: 20
     }
  });

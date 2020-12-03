@@ -1,25 +1,29 @@
 import React, { useContext } from 'react';
 import { Center } from '../components/Center';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, TextInput, SafeAreaView } from 'react-native';
 import { AuthContext } from '../AuthProvider';
-import { UserSearchBar } from '../components/UserSearchBar';
 import { LogoutButton } from '../components/LogoutButton';
 
 const Leaderboard = () => {
+    const [search, setSearch] = React.useState('');
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Center>
-                <Text style={styles.medium}>Leaderboard</Text>
-                <UserSearchBar/>
+                <Text style={styles.large}>Leaderboard</Text>
+                <TextInput style={styles.input}
+                    onChangeText={s => setSearch(s)}
+                    placeholder="Search for a user..."
+                    value={search}>
+                </TextInput>
                 <LogoutButton/>
             </Center>
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-       paddingTop: 23
+       flex: 1
     },
     input: {
        margin: 15,
