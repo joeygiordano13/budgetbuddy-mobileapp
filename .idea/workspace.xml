@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f48010be-0094-4769-afa0-37d55ce26b39" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home.js" afterDir="false" />
-    </list>
+    <list default="true" id="f48010be-0094-4769-afa0-37d55ce26b39" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +27,7 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="npm start" />
+      <command value="a" />
     </option>
   </component>
   <component name="SvnConfiguration">
@@ -45,30 +43,33 @@
     </task>
     <servers />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="170" y="272" width="834" height="785" key="AVDManager" timestamp="1607039022974">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="170" y="272" width="834" height="785" key="AVDManager/72.27.1848.1053@72.27.1848.1053" timestamp="1607039022974" />
-    <state width="988" height="253" key="GridCell.Tab.0.bottom" timestamp="1607030557433">
+    <state width="988" height="253" key="GridCell.Tab.0.bottom" timestamp="1607039037351">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="988" height="253" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1607030557433" />
-    <state width="988" height="253" key="GridCell.Tab.0.center" timestamp="1607030557433">
+    <state width="988" height="253" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1607039037351" />
+    <state width="988" height="253" key="GridCell.Tab.0.center" timestamp="1607039037351">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="988" height="253" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1607030557433" />
-    <state width="988" height="253" key="GridCell.Tab.0.left" timestamp="1607030557432">
+    <state width="988" height="253" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1607039037351" />
+    <state width="988" height="253" key="GridCell.Tab.0.left" timestamp="1607039037351">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="988" height="253" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1607030557432" />
-    <state width="988" height="253" key="GridCell.Tab.0.right" timestamp="1607030557433">
+    <state width="988" height="253" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1607039037351" />
+    <state width="988" height="253" key="GridCell.Tab.0.right" timestamp="1607039037351">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="988" height="253" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607030557433" />
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607038733142">
+    <state width="988" height="253" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607039037351" />
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607039050260">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607038733142" />
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607039050260" />
   </component>
 </project>

@@ -14,7 +14,6 @@ function Login({ navigation }) {
   const [pass, setPass] = React.useState('');
   //const [loading, setLoading] = useState(false);
   //const [errortext, setErrortext] = useState('');
-  //const image = {require('../assets/bubblebackground.png')};
 
   <ImageBackground
           style={styles.backgroundImage} 
@@ -24,9 +23,16 @@ function Login({ navigation }) {
     <ImageBackground 
     style={styles.backgroundImage} 
     source={require('../assets/bubblebackground.png')}>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.loginBox}>
+        <SafeAreaView style={{left: 45}}>
+          <Button style={styles.submitButton}
+            title="Register"
+            color="#FB2B60"
+            onPress={() => {
+              navigation.navigate("Register");
+            }}/>
+        </SafeAreaView>
         <Center>
-          <Text style={styles.large}>Login Form</Text>
           <TextInput style={styles.input}
             onChangeText={em => setEmail(em)}
             placeholder="Email"
@@ -37,20 +43,16 @@ function Login({ navigation }) {
             placeholder="Password"
             value={pass}>
           </TextInput>
-          <Button style={styles.submitButton}
-            title="Submit"
-            onPress={() => {
-              login();
-            }}
-          />
-          <Button style={styles.submitButton}
-            title="go to register"
-            onPress={() => {
-              navigation.navigate("Register");
-            }}
-          />
-          <Text style={styles.medium}>Forgot Password? Click here.</Text>
         </Center>
+      </SafeAreaView>
+      <SafeAreaView>
+        <Button style={styles.submitButton}
+          color="#FB2B60"
+          title="Login"
+          onPress={() => {
+            login();
+          }}/>
+        <Text style={styles.medium}>Forgot Password? Click here.</Text>
       </SafeAreaView>
     </ImageBackground>
   );
@@ -120,7 +122,10 @@ export const AuthStack = ({}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: "space-between",
+    padding: 20,
+    margin: 10,
   },
   input: {
     margin: 1,
@@ -148,5 +153,18 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
-  }
+  }, 
+  loginBox: {
+    flex: 0.3,
+    backgroundColor: "#19c0ff",
+    width: 250,
+    borderWidth: 2,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    margin: 10,
+    alignItems: 'center',
+    paddingTop: 10
+},
 })

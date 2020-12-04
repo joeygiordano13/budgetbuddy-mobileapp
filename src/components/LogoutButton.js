@@ -18,7 +18,9 @@ export const LogoutButton = () =>
 const styles = StyleSheet.create({
     logout: {
         alignSelf: 'flex-end',
-        marginTop: -5,
+        marginTop: 5,
+        right: 5,
+        top: 25,
         position: 'absolute',
     }
 });
