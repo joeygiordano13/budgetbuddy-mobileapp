@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f48010be-0094-4769-afa0-37d55ce26b39" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.yarn-integrity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AuthStack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthStack.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LogoutButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogoutButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UserSearchBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserSearchBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Budgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Budgets.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Leaderboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Leaderboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,10 +46,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="215" y="276" width="834" height="785" key="AVDManager" timestamp="1607030558538">
+    <state x="170" y="272" width="834" height="785" key="AVDManager" timestamp="1607039022974">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="215" y="276" width="834" height="785" key="AVDManager/72.27.1848.1053@72.27.1848.1053" timestamp="1607030558538" />
+    <state x="170" y="272" width="834" height="785" key="AVDManager/72.27.1848.1053@72.27.1848.1053" timestamp="1607039022974" />
     <state width="988" height="253" key="GridCell.Tab.0.bottom" timestamp="1607030557433">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
@@ -75,9 +66,9 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="988" height="253" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607030557433" />
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607030547191">
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607038733142">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607030547191" />
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607038733142" />
   </component>
 </project>
