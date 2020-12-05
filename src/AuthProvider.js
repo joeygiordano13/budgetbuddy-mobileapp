@@ -12,10 +12,10 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     return <AuthContext.Provider value={{
         user, 
-        login: () => {
-            const fakeUser = { username: 'buddy' }
-            setUser(fakeUser);
-            AsyncStorage.setItem('user', JSON.stringify(fakeUser));
+        login: ({id, accessToken}) => {
+            const user = { userID : id, token : accessToken }
+            setUser({user});
+            AsyncStorage.setItem('user', JSON.stringify(user));
         },
         logout: () => {
             setUser(null);

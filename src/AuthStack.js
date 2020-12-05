@@ -1,62 +1,116 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
+import { TextInput, Button, Alert, Text, SafeAreaView, ImageBackground, StyleSheet } from 'react-native';
 import { createStackNavigator } from "@react-navigation/stack";
-import { AuthContext } from "./AuthProvider";
-import { Center } from "./components/Center";
-import { Button, Text, SafeAreaView, ImageBackground, StyleSheet, TextInput } from "react-native";
-
+import { buildPath } from './functions/BuildPath';
+import { Center } from './components/Center';
+import { AuthContext } from './AuthProvider';
+import { Card } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
-function Login({ navigation }) {
-  //const { user, pass } = useContext(AuthContext);
-  const { login } = useContext(AuthContext);
-  const [email, setEmail] = React.useState('');
-  const [pass, setPass] = React.useState('');
-  //const [loading, setLoading] = useState(false);
-  //const [errortext, setErrortext] = useState('');
-
-  <ImageBackground
-          style={styles.backgroundImage} 
-          source={require('../assets/bubblebackground.png')}
-        />
+export const AuthStack = ({}) => {
   return (
-    <ImageBackground 
-    style={styles.backgroundImage} 
-    source={require('../assets/bubblebackground.png')}>
-      <SafeAreaView style={styles.loginBox}>
-        <SafeAreaView style={{left: 45}}>
-          <Button style={styles.submitButton}
-            title="Register"
-            color="#FB2B60"
-            onPress={() => {
-              navigation.navigate("Register");
-            }}/>
-        </SafeAreaView>
-        <Center>
-          <TextInput style={styles.input}
-            onChangeText={em => setEmail(em)}
-            placeholder="Email"
-            value={email}>
-          </TextInput>
-          <TextInput style={styles.input}
-            onChangeText={pw => setPass(pw)}
-            placeholder="Password"
-            value={pass}>
-          </TextInput>
-        </Center>
-      </SafeAreaView>
-      <SafeAreaView>
-        <Button style={styles.submitButton}
-          color="#FB2B60"
-          title="Login"
-          onPress={() => {
-            login();
-          }}/>
-        <Text style={styles.medium}>Forgot Password? Click here.</Text>
-      </SafeAreaView>
-    </ImageBackground>
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen
+        options={{
+          headerTitle: "Sign In"
+        }}
+        name="Login"
+        component={Login}
+      />
+      <Stack.Screen
+        options={{
+          headerTitle: "Sign Up"
+        }}
+        name="Register"
+        component={Register}
+      />
+    </Stack.Navigator>
   );
-}
+};
+
+function Login({navigation}) {
+  const {login} = useContext(AuthContext);
+
+  const [loginEmail, setEmail] = React.useState('');
+  const [loginPassword, setPassword] = React.useState('');
+
+  var message = '';
+
+  const [ showAlert, setAlert ] = useState(false);
+
+  const doLogin = async event => {
+      event.preventDefault();
+
+      var obj = {email:loginEmail, password:loginPassword};
+      var js = JSON.stringify(obj);
+      try
+      {
+          // API call
+          const response = await fetch(buildPath('api/login'),
+              {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+
+          // Parse JSON response
+          var res = JSON.parse(await response.text());
+
+          if( res.error != '')
+          {
+            Alert.alert("incorrect login email: " + loginEmail + '\n');
+            console.log('incorrect login email: ' + loginEmail + '\n');
+            message = 'Email/Password combination incorrect';
+            setAlert(true);
+          }
+          else
+          {
+            Alert.alert("success login email: " + loginEmail + '\n');
+            console.log('success login email: ' + loginEmail + '\n');
+            login(res.id, res.accessToken);
+          }
+      }
+      catch(e)
+      {
+          Alert.alert("failure login email: " + js + "\n");
+          return;
+      }
+  }
+
+  return (
+      <ImageBackground 
+      style={styles.backgroundImage} 
+      source={require('../assets/bubblebackground.png')}>
+        <Center>
+          <SafeAreaView style={styles.loginBox}>
+            <SafeAreaView style={{left: 45}}>
+              <Button style={styles.submitButton}
+                title="Register"
+                color="#FB2B60"
+                onPress={() => {
+                  navigation.navigate("Register");
+                }}/>
+            </SafeAreaView>
+            <TextInput style={styles.input}
+              onChangeText={em => setEmail(em)}
+              placeholder="Email"
+              value={loginEmail}>
+            </TextInput>
+            <TextInput style={styles.input}
+              onChangeText={pw => setPassword(pw)}
+              placeholder="Password"
+              value={loginPassword}>
+            </TextInput>
+        </SafeAreaView>
+        <SafeAreaView>
+          <Button style={styles.submitButton}
+            color="#FB2B60"
+            title="Login"
+            onPress={doLogin}/>
+          <Text style={styles.medium}>Forgot Password? Click here.</Text>
+        </SafeAreaView>
+        </Center>
+      </ImageBackground>
+  );
+};
 
 function Register({ navigation }) {
   // Register usestates
@@ -83,42 +137,14 @@ function Register({ navigation }) {
             onChangeText={pw => setPassword(pw)}
             placeholder="Password"
             value={password}></TextInput>
-          <TextInput style={styles.input}
-            onChangeText={pw => setPassword(pw)}
-            placeholder="Confirm Password"
-            value={password}></TextInput>
           <Button style={styles.submitButton}
-            title="go to login"
-            onPress={() => {
-              navigation.navigate("Login");
-            // navigation.goBack()
-          }}/>
+            title="Register"
+            onPress={console.log('register')}/>
         </Center>
       </SafeAreaView>
-    </ImageBackground>
+    </ImageBackground>  
   );
 }
-
-export const AuthStack = ({}) => {
-  return (
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen
-        options={{
-          headerTitle: "Sign In"
-        }}
-        name="Login"
-        component={Login}
-      />
-      <Stack.Screen
-        options={{
-          headerTitle: "Sign Up"
-        }}
-        name="Register"
-        component={Register}
-      />
-    </Stack.Navigator>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -167,4 +193,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 10
 },
-})
+});
