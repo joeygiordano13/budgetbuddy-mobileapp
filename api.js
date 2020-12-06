@@ -2,6 +2,7 @@ const { ObjectId } = require('mongodb');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { parse } = require('path');
+const { Alert } = require('react-native');
 exports.setApp = function (app, client ){
 
 
@@ -315,13 +316,16 @@ exports.setApp = function (app, client ){
         // outgoing: id, firstName, lastName, error
 
         var error = '';
+        console.log('in api');
 
         // Acquire a database object
         const db = client.db();
 
+        //Alert.alert(req);
         // Check if using email to login
         var results = await db.collection('users').find({"email":req.param('email'), "password":req.param('password')}).toArray();
 
+        //Alert.alert(results.length);
         // if email didn't work, try as username
         if (results.length === 0)
             results = await db.collection('users').find({"username":req.param('username'), "password":req.param('password')}).toArray();
@@ -333,10 +337,13 @@ exports.setApp = function (app, client ){
         var id = -1;
         var ret = {};
 
+        console.log(results[0]);
+
         console.log("AWERRTWERTWERTWER: "+results[0].verification);
 
         if( results[0].verification == true && results.length > 0)
         {
+            //console.log('340');
             id = results[0]._id;
             var username = results[0].username;
             var email = results[0].email;
@@ -367,6 +374,7 @@ exports.setApp = function (app, client ){
         }
         else
         {
+            console.log('371');
             ret={error: "email has not been verified yet", isVerified:results[0].verification};
         }
 		res.status(200).json(ret);
@@ -397,9 +405,9 @@ exports.setApp = function (app, client ){
               var friends = user[0].friends;
               var _ret = [];
 
-              var iggy = await db.collection('users').find({username : "iggy"}).toArray();
+              //var iggy = await db.collection('users').find({username : "iggy"}).toArray();
 
-              var _ret = [];
+              //var _ret = [];
 
               for (var i = 0; i < results.length; i++) {
                 var found = false;

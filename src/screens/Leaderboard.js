@@ -3,6 +3,8 @@ import { Center } from '../components/Center';
 import { View, Text, Button, FlatList, StyleSheet, TextInput, SafeAreaView } from 'react-native';
 import { AuthContext } from '../AuthProvider';
 import { LogoutButton } from '../components/LogoutButton';
+import { FriendsTable } from '../components/FriendsTable';
+
 
 const Leaderboard = () => {
     const [search, setSearch] = React.useState('');

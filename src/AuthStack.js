@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { TextInput, Button, Alert, Text, SafeAreaView, ImageBackground, StyleSheet } from 'react-native';
+import { TextInput, Button, Alert, Text, SafeAreaView, ImageBackground, StyleSheet, Keyboard } from 'react-native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { buildPath } from './functions/BuildPath';
 import { Center } from './components/Center';
@@ -56,21 +56,22 @@ function Login({navigation}) {
 
           if( res.error != '')
           {
-            Alert.alert("incorrect login email: " + loginEmail + '\n');
+            //Alert.alert("incorrect login email: " + loginEmail + '\n');
+            Alert.alert('incorrect login, userID: ' + res.id + '\n');
             console.log('incorrect login email: ' + loginEmail + '\n');
             message = 'Email/Password combination incorrect';
             setAlert(true);
           }
           else
           {
-            Alert.alert("success login email: " + loginEmail + '\n');
-            console.log('success login email: ' + loginEmail + '\n');
+            //console.log("success login email: " + loginEmail + '\n');
+            Alert.alert('success login, userID: ' + res.id + '\n');
             login(res.id, res.accessToken);
           }
       }
       catch(e)
       {
-          Alert.alert("failure login email: " + js + "\n");
+          Alert.alert("failure login email: " + e + "\n");
           return;
       }
   }
@@ -97,16 +98,13 @@ function Login({navigation}) {
             <TextInput style={styles.input}
               onChangeText={pw => setPassword(pw)}
               placeholder="Password"
-              value={loginPassword}>
-            </TextInput>
-        </SafeAreaView>
-        <SafeAreaView>
-          <Button style={styles.submitButton}
+              value={loginPassword}/>
+            <Button style={styles.submitButton}
             color="#FB2B60"
             title="Login"
             onPress={doLogin}/>
-          <Text style={styles.medium}>Forgot Password? Click here.</Text>
-        </SafeAreaView>
+            <Text style={styles.medium}>Forgot Password? Click here.</Text>
+          </SafeAreaView>
         </Center>
       </ImageBackground>
   );
@@ -165,7 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#7a42f4',
     padding: 10,
     margin: 25,
-    height: 40,
+    height: 20,
   },
   submitButtonText: {
     color: 'white'
@@ -174,7 +172,7 @@ const styles = StyleSheet.create({
     fontSize: 28
   },
   medium: {
-    fontSize: 20
+    fontSize: 15
   },
   backgroundImage: {
     flex: 1,
@@ -190,7 +188,8 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     margin: 10,
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 10
+    paddingTop: 20
 },
 });

@@ -3,7 +3,7 @@ import { Center } from '../components/Center';
 import { Text, View, Button, StyleSheet, SafeAreaView, TextInput } from 'react-native';
 import { AuthContext } from '../AuthProvider';
 //import { TextInput } from 'react-native-gesture-handler';
-import AddBudget from '../components/AddBudget';
+import { AddBudget } from '../components/AddBudget';
 import { LogoutButton } from '../components/LogoutButton';
 
 const Budgets = () => {
@@ -36,7 +36,8 @@ const Budgets = () => {
                     <Button
                         color="#FB2B60"
                         title="Add"
-                        onClick={AddBudget}>
+                        //onClick={AddBudget}
+                        >
                     </Button>
                 </SafeAreaView>
                 <LogoutButton/>

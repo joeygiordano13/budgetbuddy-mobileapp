@@ -3,30 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="f48010be-0094-4769-afa0-37d55ce26b39" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.yarn-integrity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native-community/cli/node_modules/deepmerge/changelog.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native-community/cli/node_modules/deepmerge/dist/umd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native-community/cli/node_modules/deepmerge/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native-community/cli/node_modules/deepmerge/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native-community/cli/node_modules/deepmerge/license.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native-community/cli/node_modules/deepmerge/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native-community/cli/node_modules/deepmerge/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native-community/cli/node_modules/deepmerge/rollup.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/deepmerge/changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/deepmerge/changelog.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/deepmerge/dist/cjs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/deepmerge/dist/umd.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/deepmerge/dist/umd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/deepmerge/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/deepmerge/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/deepmerge/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/deepmerge/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/deepmerge/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/deepmerge/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/deepmerge/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/deepmerge/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AuthProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthProvider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AuthStack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthStack.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LoginForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functions/BuildPath.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/BuildPath.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Budgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Budgets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Leaderboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Leaderboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,29 +57,29 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="333" y="237" width="834" height="785" key="AVDManager" timestamp="1607149305800">
+    <state x="333" y="237" width="834" height="785" key="AVDManager" timestamp="1607199137629">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="333" y="237" width="834" height="785" key="AVDManager/72.27.1848.1053@72.27.1848.1053" timestamp="1607149305800" />
-    <state width="988" height="253" key="GridCell.Tab.0.bottom" timestamp="1607148971518">
+    <state x="333" y="237" width="834" height="785" key="AVDManager/72.27.1848.1053@72.27.1848.1053" timestamp="1607199137629" />
+    <state width="1802" height="253" key="GridCell.Tab.0.bottom" timestamp="1607201145925">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="988" height="253" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1607148971518" />
-    <state width="988" height="253" key="GridCell.Tab.0.center" timestamp="1607148971518">
+    <state width="1802" height="253" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1607201145925" />
+    <state width="1802" height="253" key="GridCell.Tab.0.center" timestamp="1607201145925">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="988" height="253" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1607148971518" />
-    <state width="988" height="253" key="GridCell.Tab.0.left" timestamp="1607148971518">
+    <state width="1802" height="253" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1607201145925" />
+    <state width="1802" height="253" key="GridCell.Tab.0.left" timestamp="1607201145925">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="988" height="253" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1607148971518" />
-    <state width="988" height="253" key="GridCell.Tab.0.right" timestamp="1607148971518">
+    <state width="1802" height="253" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1607201145925" />
+    <state width="1802" height="253" key="GridCell.Tab.0.right" timestamp="1607201145925">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="988" height="253" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607148971518" />
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607149011208">
+    <state width="1802" height="253" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607201145925" />
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607199141526">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607149011208" />
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607199141526" />
   </component>
 </project>
