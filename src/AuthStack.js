@@ -65,8 +65,10 @@ function Login({navigation}) {
           else
           {
             //console.log("success login email: " + loginEmail + '\n');
-            Alert.alert('success login, userID: ' + res.id + '\n');
-            login(res.id, res.accessToken);
+            Alert.alert('success login, token: ' + res.accessToken + '\n');
+            AsyncStorage.setItem('userID', res.id);
+            AsyncStorage.setItem('token', res.accessToken);
+            login();
           }
       }
       catch(e)

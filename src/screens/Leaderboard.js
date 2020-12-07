@@ -13,6 +13,7 @@ const Leaderboard = () => {
             <Center>
                 <SafeAreaView style={styles.label}>
                     <Text style={styles.medium}>Leaderboard</Text>
+                    <FriendsTable/>
                 </SafeAreaView>
                 <SafeAreaView style={styles.label}>
                     <Text style={styles.medium}>Find Buddies</Text>

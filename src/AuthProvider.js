@@ -12,8 +12,9 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     return <AuthContext.Provider value={{
         user, 
-        login: ({id, accessToken}) => {
-            const user = { userID : id, token : accessToken }
+        login: () => {
+            const user = { userID : AsyncStorage.getItem('userID'), 
+                            token : AsyncStorage.getItem('token') }
             setUser({user});
             AsyncStorage.setItem('user', JSON.stringify(user));
         },

@@ -1,8 +1,9 @@
 import React from 'react';
 import { buildPath } from '../functions/BuildPath';
 //import { DataTable } from 'react-native-paper';
-import { SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SafeAreaView, FlatList, Text, TouchableOpacity, Alert } from 'react-native';
+
+import AsyncStorage  from '@react-native-async-storage/async-storage';
 //import { FlatList } from 'react-native-gesture-handler';
 
 export default class FriendsTable extends React.Component {
@@ -16,13 +17,15 @@ export default class FriendsTable extends React.Component {
 
   componentDidMount() {
     var objFriend = AsyncStorage.getItem('user').param('userID');
+    console.log(objFriend);
+    Alert.alert('ObjFriend: ' + objFriend);
     //var objFriend = {userID:localStorage.getItem("userID")};
     var jsFriends = JSON.stringify(objFriend);
     Promise.all([
       fetch(buildPath('api/get-top-10'),
-      {method:'POST', headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")}}),
+      {method:'POST', headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + AsyncStorage.getItem("token")}}),
       fetch(buildPath('api/showFriends'),
-        {method:'POST',body:jsFriends,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")}})
+        {method:'POST',body:jsFriends,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + AsyncStorage.getItem("token")}})
     ]).then(([res1, res2]) => {
          return Promise.all([res1.json(), res2.json()])
       }).then(([res1, res2]) => {
@@ -34,25 +37,12 @@ export default class FriendsTable extends React.Component {
   }
 
   render() {
-    const { global, friends } = this.state;
+    //const { global, friends } = this.state;
 
     return (
-        <SafeAreaView>
-            <FlatList
-                style={{flex: 1}}
-                enableEmptySections={true}
-                data={friends}
-                keyExtractor={(item) => {
-                    return item.username;
-                }}
-                renderItem={({item}) => {
-                    return (
-                        <TouchableOpacity>
-                            <Text>{item.username}</Text>
-                        </TouchableOpacity>
-                    )
-                }}/>
-        </SafeAreaView>
+       <SafeAreaView>
+         <Text>Hello</Text>
+       </SafeAreaView>
     );
-  }
-}
+  };
+};
