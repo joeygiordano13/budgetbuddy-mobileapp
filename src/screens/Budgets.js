@@ -1,55 +1,34 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Center } from '../components/Center';
-import { Text, View, Button, StyleSheet, SafeAreaView, TextInput } from 'react-native';
-import { AuthContext } from '../AuthProvider';
-//import { TextInput } from 'react-native-gesture-handler';
-import { AddBudget } from '../components/AddBudget';
+import { SafeAreaView,Text, Button, StyleSheet } from 'react-native';
 import { LogoutButton } from '../components/LogoutButton';
 import { FontAwesome } from '@expo/vector-icons'; 
 
 const Budgets = () => {
-    const [budgetName, setBudgetName] = React.useState('');
-    const [budgetGoal, setBudgetGoal] = React.useState('');
-    const [startingAmount, setAmount] = React.useState('');
-
     return (
         <SafeAreaView style={styles.container}>
             <Center>
                 <SafeAreaView style={styles.label}>
                     <Text style={styles.medium}>
-                    <FontAwesome name="plus" size={48} color="black" /> Add  new Budget
+                        <FontAwesome name="plus" size={48} color="black" /> 
+                         Add new Budget
                     </Text>
                 </SafeAreaView>
+                <SafeAreaView style={styles.top}>
+                    <Text style={styles.medium}>Budget Name</Text>
+                    <SafeAreaView style={styles.inner}>
+                    </SafeAreaView>
+                </SafeAreaView>
                 <SafeAreaView style={styles.middle}>
-                    <TextInput style={styles.input}
-                        onChangeText={name => setBudgetName(name)}
-                        placeholder="budget name"
-                        value={budgetName}>
-                    </TextInput>
-                    <TextInput style={styles.input}
-                        onChangeText={goal => setBudgetGoal(goal)}
-                        placeholder="budget goal"
-                        value={budgetGoal}>
-                    </TextInput>
-                    <TextInput style={styles.input}
-                        onChangeText={amount => setAmount(amount)}
-                        placeholder="starting amount"
-                        value={startingAmount}>
-                    </TextInput>
-                    <Button
-                        color="#FB2B60"
-                        title="Add"
-                        //onClick={AddBudget}
-                        >
-                    </Button>
+                    <Text style={styles.medium}>Budget Name</Text>
+                    <SafeAreaView style={styles.inner}>
+                    </SafeAreaView>
                 </SafeAreaView>
                 <LogoutButton/>
             </Center>
         </SafeAreaView>
     );
-};
-
-export default Budgets;
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -59,13 +38,49 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     input: {
-        margin: 5,
+        margin: 25,
         height: 40,
-        width: 150,
-        backgroundColor: '#fff',
         borderColor: '#7a42f4',
-        paddingLeft: 7,
-        borderWidth: 1
+        borderWidth: 10
+    },
+    submitButton: {
+        backgroundColor: '#7a42f4',
+        padding: 10,
+        margin: 15,
+        height: 40,
+    },
+    submitButtonText: {
+        color: 'white'
+    },
+    large: {
+        fontSize: 28,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    medium: {
+        fontSize: 48,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    inner: {
+        backgroundColor: '#55D0F1',
+        flex: 0.80,
+        width: 350, borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20
+    },
+    top: {
+        flex: 0.4,
+        backgroundColor: "#19c0ff",
+        width: 350,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        margin: 10,
+        alignItems: 'center', 
+        paddingTop: 10
     },
     label: {
         flex: 0.15,
@@ -78,28 +93,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    submitButton: {
-        backgroundColor: '#7a42f4',
-    
-    },
-    large: {
-        fontSize: 28
-    },
-    medium: {
-        fontSize: 48
-    },
     middle: {
-        flex: 0.3,
+        flex: 0.4,
         backgroundColor: "#19c0ff",
-        width: 250,
-        borderWidth: 2,
+        width: 350,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         margin: 10,
         alignItems: 'center',
-        justifyContent: 'center',
         paddingTop: 10
     },
- });
+});
+
+export default Budgets;
