@@ -1,19 +1,22 @@
 import React from 'react';
 import { Center } from '../components/Center';
-import { SafeAreaView,Text, Button, StyleSheet } from 'react-native';
+import { SafeAreaView,Text, Button, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { LogoutButton } from '../components/LogoutButton';
 import { FontAwesome } from '@expo/vector-icons'; 
 
 const Home = () => {
-    return (
+    const [manage, setManage] = React.useState(false);
+    if (!manage)
+        return (
         <SafeAreaView style={styles.container}>
             <Center>
-                <SafeAreaView style={styles.label}>
+                <TouchableWithoutFeedback onPress={() => setManage(true)}>
+                    <View style={styles.editButton}>
                     <Text style={styles.medium}>
-                        <FontAwesome name="user" size={48} color="black" /> 
-                         Edit Profile
+                        Edit Profile
                     </Text>
-                </SafeAreaView>
+                    </View>
+                </TouchableWithoutFeedback>
                 <SafeAreaView style={styles.top}>
                     <Text style={styles.medium}>Progress Breakdown</Text>
                     <SafeAreaView style={styles.inner}>
@@ -28,6 +31,18 @@ const Home = () => {
             </Center>
         </SafeAreaView>
     );
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <TouchableWithoutFeedback onPress={() => setManage(false)}>
+                    <View style={styles.editButton}>
+                    <Text style={styles.medium}>
+                        Save
+                    </Text>
+                    </View>
+            </TouchableWithoutFeedback>
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -43,15 +58,20 @@ const styles = StyleSheet.create({
         borderColor: '#7a42f4',
         borderWidth: 10
     },
-    submitButton: {
-        backgroundColor: '#7a42f4',
-        padding: 10,
-        margin: 15,
-        height: 40,
-    },
-    submitButtonText: {
-        color: 'white'
-    },
+    editButton: {
+        flex: .1,
+        backgroundColor: "#fcb401",
+        width: 350,
+        bottom: 0.5,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 25
+      },
+
     large: {
         fontSize: 28,
         justifyContent: 'center',
@@ -80,7 +100,8 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         margin: 10,
         alignItems: 'center', 
-        paddingTop: 10
+        paddingTop: 10,
+        top: 30
     },
     label: {
         flex: 0.15,
@@ -103,7 +124,8 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         margin: 10,
         alignItems: 'center',
-        paddingTop: 10
+        paddingTop: 10,
+        top: 30
     },
 });
 

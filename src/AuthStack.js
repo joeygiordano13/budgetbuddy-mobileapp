@@ -98,19 +98,22 @@ function Login({navigation}) {
                   }}>
               <View style={styles.submitButton}><Text style={styles.medium}>Login</Text></View>
             </TouchableWithoutFeedback>
+            <Text style={styles.mediumStartLogin}>
+                Email
+            </Text>
             <TextInput style={styles.input}
               onChangeText={em => setEmail(em)}
-              placeholder="Email"
               value={loginEmail}>
             </TextInput>
-            <TextInput style={styles.input}
+            <Text style={styles.mediumStartLogin}>
+                Password
+            </Text>
+            <TextInput style={styles.input} secureTextEntry={true}
               onChangeText={pw => setPassword(pw)}
-              placeholder="Password"
               value={loginPassword}/>
-            <Button style={styles.submitButton}
-            color="#FB2B60"
-            title="Login"
-            onPress={doLogin}/>
+            <TouchableWithoutFeedback onPress={doLogin}>
+              <View style={styles.loginButton}><Text style={styles.medium}>Login</Text></View>
+            </TouchableWithoutFeedback>
             <Text style={""}>Forgot Password? Click here.</Text>
           </SafeAreaView>
         </Center>
@@ -200,13 +203,13 @@ function Register({navigation}) {
                 Email
             </Text>
             <TextInput style={styles.input2}
-              onChangeText={em => setEmail(em)}
+              onChangeText={em => setEmail(em)} secureTextEntry={true}
               value={registerEmail}></TextInput>
             <Text style={styles.mediumStart}>
                 Password
             </Text>
             <TextInput style={styles.input2}
-              onChangeText={pw => setPassword(pw)}
+              onChangeText={pw => setPassword(pw)} secureTextEntry={true}
               value={password}></TextInput>
             <Text style={styles.mediumStart}>
                 Confirm Password
@@ -214,10 +217,9 @@ function Register({navigation}) {
             <TextInput style={styles.input2}
               onChangeText={pw => setPasswordConfirm(pw)}
               value={passwordConfirm}></TextInput>
-            <Button style={styles.submitButton2}
-              color="#FB2B60"
-              title="Register"
-              onPress={doRegistration}/>
+            <TouchableWithoutFeedback onPress={doRegistration}>
+              <View style={styles.doRegisterButton}><Text style={styles.medium}>Register</Text></View>
+            </TouchableWithoutFeedback>
             <Text>{message}</Text>
         </SafeAreaView>
       </Center>
@@ -233,8 +235,8 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   input: {
-    flex: 5,
-    margin: 5,
+    flex: 3,
+    margin: 20,
     height: 20,
     width: 300,
     right: 40,
@@ -243,6 +245,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
+    bottom: 130
   },
   input2: {
     flex: 0.5,
@@ -255,6 +258,38 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
+  },
+  loginButton: {
+    flex: 5,
+    backgroundColor: "#fcb401",
+    width: 150,
+    height: 50,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    fontSize: 50,
+    paddingStart: 50,
+    bottom: 112,
+    left: 40,
+  },
+  doRegisterButton: {
+    flex: 1,
+    backgroundColor: "#fcb401",
+    width: 150,
+    height: 50,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    fontSize: 50,
+    paddingStart: 39,
+    left: 40,
+    top: 10
   },
   submitButton: {
     flex: 5,
@@ -270,7 +305,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     right: 90,
     paddingStart: 50,
-    bottom: 195,
+    bottom: 149,
     right: 30
   },
   submitButtonn: {
@@ -278,7 +313,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#55D0F1",
     width: 325,
     right: 30,
-    bottom: 131,
+    bottom: 74,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderBottomLeftRadius: 50,
@@ -287,11 +322,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   registerButton: {
-    flex: 2,
+    flex: 1,
     backgroundColor: "#fb2b60",
     width: 150,
-    bottom: 71,
-    left: 134,
+    bottom: 93.5,
+    left: 135,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderBottomLeftRadius: 50,
@@ -300,10 +335,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   registerButtonn: {
-    flex: 2,
+    flex: 1,
     backgroundColor: "#55D0F1",
     width: 305,
-    height: 50,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     borderBottomLeftRadius: 50,
@@ -313,7 +347,8 @@ const styles = StyleSheet.create({
     fontSize: 50,
     right: 20,
     paddingStart: 50, 
-    marginTop: 30
+    marginTop: 30,
+    bottom: 9
   },
   submitButtonText: {
     color: 'white'
@@ -337,13 +372,19 @@ mediumStart: {
   justifyContent: 'flex-start',
   alignItems: 'center'
 },
+mediumStartLogin: {
+  fontSize: 24,
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  bottom: 120
+},
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     backgroundColor: '#19C0FF'
   }, 
   loginBox: {
-    flex: .5,
+    flex: .7,
     backgroundColor: "#19c0ff",
     width: 250,
     borderTopLeftRadius: 20,
@@ -354,13 +395,13 @@ mediumStart: {
     paddingTop: 20
 },
 loginBox2: {
-  flex: 1.4,
+  flex: 1.6,
   backgroundColor: "#19c0ff",
   width: 250,
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
   borderBottomLeftRadius: 20,
   borderBottomRightRadius: 20,
-  bottom: 50
+  bottom: 75
 },
 });

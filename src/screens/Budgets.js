@@ -1,19 +1,24 @@
 import React from 'react';
 import { Center } from '../components/Center';
-import { SafeAreaView,Text, Button, StyleSheet } from 'react-native';
+import { SafeAreaView,Text, Button, StyleSheet,  TouchableWithoutFeedback, View, ScrollView, TextInput } from 'react-native';
 import { LogoutButton } from '../components/LogoutButton';
 import { FontAwesome } from '@expo/vector-icons'; 
 
 const Budgets = () => {
-    return (
+    const [manage, setManage] = React.useState(false);
+
+    if (!manage)
+        return (
         <SafeAreaView style={styles.container}>
             <Center>
-                <SafeAreaView style={styles.label}>
+                <TouchableWithoutFeedback onPress={() => setManage(true)}>
+                    <View style={styles.newBudgetButton}>
                     <Text style={styles.medium}>
-                        <FontAwesome name="plus" size={48} color="black" /> 
+                        <FontAwesome name="plus" size={24} color="black" /> 
                          Add new Budget
                     </Text>
-                </SafeAreaView>
+                    </View>
+                </TouchableWithoutFeedback>
                 <SafeAreaView style={styles.top}>
                     <Text style={styles.medium}>Budget Name</Text>
                     <SafeAreaView style={styles.inner}>
@@ -28,6 +33,36 @@ const Budgets = () => {
             </Center>
         </SafeAreaView>
     );
+
+    return (
+        <SafeAreaView style={styles.container}>
+                <Center>
+                    <SafeAreaView style={styles.newBudgetHeader}>
+                        <Text style={styles.nBHeader}>Add New Budget</Text>
+                    </SafeAreaView>
+                    <Text style={styles.mediumUp}>Budget Name</Text>
+                    <TextInput style={styles.input}
+                    onChangeText={em => setEmail(em)}>
+                    </TextInput>
+                    <Text style={styles.mediumUp}>Budget Goal</Text>
+                    <TextInput style={styles.input}
+                    onChangeText={em => setEmail(em)}>
+                    </TextInput>
+                    <Text style={styles.mediumUp}>Starting Progress</Text>
+                    <TextInput style={styles.input}
+                    onChangeText={em => setEmail(em)}>
+                    </TextInput>
+                    <TouchableWithoutFeedback onPress={() => setManage(false)}>
+                    <View style={styles.addBudgetButton}>
+                    <Text style={styles.medium}>
+                        <FontAwesome name="plus" size={24} color="black" /> 
+                         Add
+                    </Text>
+                    </View>
+                </TouchableWithoutFeedback>
+                </Center>
+            </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -35,19 +70,54 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "space-between",
         padding: 20,
-        margin: 10,
+        backgroundColor: '#19C0FF'
+    },
+    newBudgetHeader: {
+        backgroundColor: '#fb2b60',
+        width: 414,
+        flex: .24,
+        bottom: 70
+    },
+    nBHeader: {
+        fontSize: 48,
+        alignSelf: 'center',
+        top: 40
     },
     input: {
-        margin: 25,
-        height: 40,
-        borderColor: '#7a42f4',
-        borderWidth: 10
+        width: 315,
+        flex: .15,
+        backgroundColor: 'white',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        margin: 20, 
+        bottom: 50
     },
-    submitButton: {
-        backgroundColor: '#7a42f4',
-        padding: 10,
-        margin: 15,
-        height: 40,
+    newBudgetButton: {
+        flex: .1,
+        backgroundColor: "#fcb401",
+        width: 350,
+        bottom: 0.5,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 25
+    },
+    addBudgetButton: {
+        flex: .13,
+        backgroundColor: "#fcb401",
+        width: 350,
+        bottom: 0.5,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     submitButtonText: {
         color: 'white'
@@ -58,9 +128,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     medium: {
-        fontSize: 48,
+        fontSize: 24,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    mediumUp: {
+        fontSize: 36,
+        justifyContent: 'center',
+        alignItems: 'center',
+        bottom: 40
     },
     inner: {
         backgroundColor: '#55D0F1',
@@ -80,7 +156,8 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         margin: 10,
         alignItems: 'center', 
-        paddingTop: 10
+        paddingTop: 10,
+        top: 40,
     },
     label: {
         flex: 0.15,
@@ -103,7 +180,8 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         margin: 10,
         alignItems: 'center',
-        paddingTop: 10
+        paddingTop: 10,
+        top: 40,
     },
 });
 
