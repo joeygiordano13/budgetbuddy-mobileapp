@@ -5,6 +5,7 @@ import { AuthContext } from '../AuthProvider';
 //import { TextInput } from 'react-native-gesture-handler';
 import { AddBudget } from '../components/AddBudget';
 import { LogoutButton } from '../components/LogoutButton';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 const Budgets = () => {
     const [budgetName, setBudgetName] = React.useState('');
@@ -15,7 +16,9 @@ const Budgets = () => {
         <SafeAreaView style={styles.container}>
             <Center>
                 <SafeAreaView style={styles.label}>
-                    <Text style={styles.medium}>Add Budgets</Text>
+                    <Text style={styles.medium}>
+                    <FontAwesome name="plus" size={48} color="black" /> Add  new Budget
+                    </Text>
                 </SafeAreaView>
                 <SafeAreaView style={styles.middle}>
                     <TextInput style={styles.input}
@@ -65,14 +68,13 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     label: {
-        flex: 0.05,
+        flex: 0.15,
         backgroundColor: "#fcb401",
-        width: 250,
-        borderWidth: 2,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        width: 350,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
         fontSize: 28
     },
     medium: {
-        fontSize: 20
+        fontSize: 48
     },
     middle: {
         flex: 0.3,
