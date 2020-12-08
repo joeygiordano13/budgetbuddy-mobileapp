@@ -2,19 +2,27 @@ import React from 'react';
 import { Center } from '../components/Center';
 import { SafeAreaView,Text, Button, StyleSheet } from 'react-native';
 import { LogoutButton } from '../components/LogoutButton';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 const Home = () => {
     return (
         <SafeAreaView style={styles.container}>
             <Center>
                 <SafeAreaView style={styles.label}>
-                    <Text style={styles.medium}>Dashboard</Text>
+                    <Text style={styles.medium}>
+                        <FontAwesome name="user" size={48} color="black" /> 
+                         Edit Profile
+                    </Text>
                 </SafeAreaView>
                 <SafeAreaView style={styles.top}>
                     <Text style={styles.medium}>Progress Breakdown</Text>
+                    <SafeAreaView style={styles.inner}>
+                    </SafeAreaView>
                 </SafeAreaView>
                 <SafeAreaView style={styles.middle}>
                     <Text style={styles.medium}>Progress Over Time</Text>
+                    <SafeAreaView style={styles.inner}>
+                    </SafeAreaView>
                 </SafeAreaView>
                 <LogoutButton/>
             </Center>
@@ -50,38 +58,45 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     medium: {
-        fontSize: 20,
+        fontSize: 48,
         justifyContent: 'center',
         alignItems: 'center'
     },
+    inner: {
+        backgroundColor: '#55D0F1',
+        flex: 0.80,
+        width: 350, borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20
+    },
     top: {
-        flex: 0.3,
+        flex: 0.4,
         backgroundColor: "#19c0ff",
-        width: 250,
-        borderWidth: 2,
+        width: 350,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
         margin: 10,
         alignItems: 'center', 
         paddingTop: 10
     },
     label: {
-        flex: 0.05,
+        flex: 0.15,
         backgroundColor: "#fcb401",
-        width: 250,
-        borderWidth: 2,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        width: 350,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
         alignItems: 'center',
         justifyContent: 'center'
     },
     middle: {
-        flex: 0.3,
+        flex: 0.4,
         backgroundColor: "#19c0ff",
-        width: 250,
-        borderWidth: 2,
+        width: 350,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         borderBottomLeftRadius: 20,
