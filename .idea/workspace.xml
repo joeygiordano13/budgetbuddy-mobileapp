@@ -4,9 +4,10 @@
     <list default="true" id="f48010be-0094-4769-afa0-37d55ce26b39" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AuthStack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthStack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/bottom-tabs/lib/module/views/ResourceSavingScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/bottom-tabs/lib/module/views/ResourceSavingScene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddBudget.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddBudget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FriendsTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendsTable.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Leaderboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Leaderboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,8 +34,8 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
-      <command value="a" />
       <command value="npm start" />
+      <command value="a" />
       <command value="expo start" />
     </option>
   </component>
@@ -55,29 +56,29 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="333" y="237" width="834" height="785" key="AVDManager" timestamp="1607405495792">
+    <state x="440" y="192" width="834" height="785" key="AVDManager" timestamp="1607407991919">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="333" y="237" width="834" height="785" key="AVDManager/72.27.1848.1053@72.27.1848.1053" timestamp="1607405495792" />
-    <state width="948" height="160" key="GridCell.Tab.0.bottom" timestamp="1607405494210">
+    <state x="440" y="192" width="834" height="785" key="AVDManager/72.27.1848.1053@72.27.1848.1053" timestamp="1607407991919" />
+    <state width="948" height="160" key="GridCell.Tab.0.bottom" timestamp="1607415080619">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="948" height="160" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1607405494210" />
-    <state width="948" height="160" key="GridCell.Tab.0.center" timestamp="1607405494209">
+    <state width="948" height="160" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1607415080619" />
+    <state width="948" height="160" key="GridCell.Tab.0.center" timestamp="1607415080618">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="948" height="160" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1607405494209" />
-    <state width="948" height="160" key="GridCell.Tab.0.left" timestamp="1607405494209">
+    <state width="948" height="160" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1607415080618" />
+    <state width="948" height="160" key="GridCell.Tab.0.left" timestamp="1607415080618">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="948" height="160" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1607405494209" />
-    <state width="948" height="160" key="GridCell.Tab.0.right" timestamp="1607405494210">
+    <state width="948" height="160" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1607415080618" />
+    <state width="948" height="160" key="GridCell.Tab.0.right" timestamp="1607415080619">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="948" height="160" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607405494210" />
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607405494170">
+    <state width="948" height="160" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607415080619" />
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607409815971">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607405494170" />
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607409815971" />
   </component>
 </project>
