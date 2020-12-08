@@ -1,8 +1,7 @@
 import React from 'react';
 import { buildPath } from '../functions/BuildPath';
 //import { DataTable } from 'react-native-paper';
-import { SafeAreaView, FlatList, Text, TouchableOpacity, Alert } from 'react-native';
-
+import { SafeAreaView, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
 //import { FlatList } from 'react-native-gesture-handler';
 
@@ -12,10 +11,11 @@ export default class FriendsTable extends React.Component {
     this.state = {
       friends: [],
       global: []
-    }
+    };
   }
 
   componentDidMount() {
+    Alert.alert('18');
     var objFriend = AsyncStorage.getItem('user').param('userID');
     console.log(objFriend);
     Alert.alert('ObjFriend: ' + objFriend);
@@ -37,12 +37,12 @@ export default class FriendsTable extends React.Component {
   }
 
   render() {
-    //const { global, friends } = this.state;
+    const { global, friends } = this.state;
 
     return (
-       <SafeAreaView>
-         <Text>Hello</Text>
+       <SafeAreaView style={{flex:1}}>
+         <Text>Friends</Text>
        </SafeAreaView>
     );
-  };
-};
+  }
+}

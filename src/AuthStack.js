@@ -114,34 +114,81 @@ function Login({navigation}) {
 
 function Register({ navigation }) {
   // Register usestates
-  const [username, setUsername] = React.useState('');
+  const [registerUsername, setUsername] = React.useState('');
+  const [registerEmail, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [email, setEmail] = React.useState('');
+  const [passwordConfirm, setPasswordConfirm] = React.useState('');
+
+  var budgetAndFriends = [];
+  
+  const [ message, setMessage ] = useState('');
+  
+  const doRegistration = async event => {
+    event.preventDefault();
+    if (registerEmail.value.length === 0 || registerUsername.value.length === 0
+        || password.value.length === 0 || passwordConfirm.value.length === 0) {
+          setMessage("Please fill in all fields");
+          Alert.alert(message);
+          return;
+        }
+    if (password.value != passwordConfirm.value) {
+      setMessage("Passwords do not match");
+      Alert.alert(message);
+      return;
+    }
+
+    var obj = {email: registerEmail, username: registerUsername, verification: false,
+              friends: budgetAndFriends, password: password, rankMetric: -1};
+    var js = JSON.stringify(obj);
+
+    try {
+      const response = await fetch(buildPath('api/register'),
+            {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
+
+      var res = JSON.parse(await response.text());
+
+      if (res.error != '') {
+        setMessage(res.error);
+        Alert.alert(message);
+      } else {
+        setMessage("An email has been sent to " + registerEmail.value + ". Please verify your email");
+        Alert.alert(message);
+      }
+    } catch (e) {
+      Alert.alert(e);
+      return;
+    }
+  }
 
   return (
     <ImageBackground 
     style={styles.backgroundImage} 
     source={require('../assets/bubblebackground.png')}>
-      <SafeAreaView style={styles.container}>
-        <Center>
-          <Text style={styles.large}>Register Form</Text>
-          <TextInput style={styles.input}
-            onChangeText={u => setUsername(u)}
-            placeholder="Username"
-            value={username}></TextInput>
-          <TextInput style={styles.input}
-            onChangeText={em => setEmail(em)}
-            placeholder="Email"
-            value={email}></TextInput>
-          <TextInput style={styles.input}
-            onChangeText={pw => setPassword(pw)}
-            placeholder="Password"
-            value={password}></TextInput>
-          <Button style={styles.submitButton}
-            title="Register"
-            onPress={console.log('register')}/>
-        </Center>
-      </SafeAreaView>
+      <Center>
+        <SafeAreaView style={styles.loginBox}>
+            <TextInput style={styles.input}
+              onChangeText={u => setUsername(u)}
+              placeholder="Username"
+              value={registerUsername}></TextInput>
+            <TextInput style={styles.input}
+              onChangeText={em => setEmail(em)}
+              placeholder="Email"
+              value={registerEmail}></TextInput>
+            <TextInput style={styles.input}
+              onChangeText={pw => setPassword(pw)}
+              placeholder="Password"
+              value={password}></TextInput>
+            <TextInput style={styles.input}
+              onChangeText={pw => setPasswordConfirm(pw)}
+              placeholder="Confirm Password"
+              value={passwordConfirm}></TextInput>
+            <Button style={styles.submitButton}
+              color="#FB2B60"
+              title="Register"
+              onPress={doRegistration}/>
+            <Text>{message}</Text>
+        </SafeAreaView>
+      </Center>
     </ImageBackground>  
   );
 }
