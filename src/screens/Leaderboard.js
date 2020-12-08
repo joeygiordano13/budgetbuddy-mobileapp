@@ -24,7 +24,6 @@ const Leaderboard = () => {
                         value={search}>
                     </TextInput>
                 </SafeAreaView>
-                <FriendsTable/>
                 <LogoutButton/>
             </Center>
         </SafeAreaView>

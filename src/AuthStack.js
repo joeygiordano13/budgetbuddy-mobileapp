@@ -112,7 +112,7 @@ function Login({navigation}) {
   );
 };
 
-function Register({ navigation }) {
+function Register() {
   // Register usestates
   const [registerUsername, setUsername] = React.useState('');
   const [registerEmail, setEmail] = React.useState('');
@@ -125,13 +125,13 @@ function Register({ navigation }) {
   
   const doRegistration = async event => {
     event.preventDefault();
-    if (registerEmail.value.length === 0 || registerUsername.value.length === 0
-        || password.value.length === 0 || passwordConfirm.value.length === 0) {
+    if (registerEmail.length === 0 || registerUsername.length === 0
+        || password.length === 0 || passwordConfirm.length === 0) {
           setMessage("Please fill in all fields");
           Alert.alert(message);
           return;
         }
-    if (password.value != passwordConfirm.value) {
+    if (password != passwordConfirm) {
       setMessage("Passwords do not match");
       Alert.alert(message);
       return;
@@ -149,12 +149,15 @@ function Register({ navigation }) {
 
       if (res.error != '') {
         setMessage(res.error);
+        console.log('error');
         Alert.alert(message);
       } else {
-        setMessage("An email has been sent to " + registerEmail.value + ". Please verify your email");
+        setMessage("An email has been sent to " + registerEmail + ". Please verify your email");
+        console.log(message);
         Alert.alert(message);
       }
     } catch (e) {
+      console.log('bad api call');
       Alert.alert(e);
       return;
     }

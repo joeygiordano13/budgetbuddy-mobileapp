@@ -306,7 +306,8 @@ exports.setApp = function (app, client ){
         })
         */
 
-        // res.status(200).json(ret);
+        res.status(200).json(ret);
+        console.log(res);
     });
 
 
