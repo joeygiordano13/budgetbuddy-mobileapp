@@ -12,7 +12,7 @@ const Budgets = () => {
         <SafeAreaView style={styles.container}>
             <Center>
                 <TouchableWithoutFeedback onPress={() => setManage(true)}>
-                    <View style={styles.addBudgetButton}>
+                    <View style={styles.newBudgetButton}>
                     <Text style={styles.medium}>
                         <FontAwesome name="plus" size={24} color="black" /> 
                          Add new Budget
@@ -40,15 +40,15 @@ const Budgets = () => {
                     <SafeAreaView style={styles.newBudgetHeader}>
                         <Text style={styles.nBHeader}>Add New Budget</Text>
                     </SafeAreaView>
-                    <Text style={styles.medium}>Budget Name</Text>
+                    <Text style={styles.mediumUp}>Budget Name</Text>
                     <TextInput style={styles.input}
                     onChangeText={em => setEmail(em)}>
                     </TextInput>
-                    <Text style={styles.medium}>Budget Goal</Text>
+                    <Text style={styles.mediumUp}>Budget Goal</Text>
                     <TextInput style={styles.input}
                     onChangeText={em => setEmail(em)}>
                     </TextInput>
-                    <Text style={styles.medium}>Starting Progress</Text>
+                    <Text style={styles.mediumUp}>Starting Progress</Text>
                     <TextInput style={styles.input}
                     onChangeText={em => setEmail(em)}>
                     </TextInput>
@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     newBudgetHeader: {
         backgroundColor: '#fb2b60',
         width: 414,
-        flex: .13,
-        bottom: 180
+        flex: .24,
+        bottom: 70
     },
     nBHeader: {
         fontSize: 48,
@@ -85,14 +85,16 @@ const styles = StyleSheet.create({
     },
     input: {
         width: 315,
-        flex: .1,
+        flex: .15,
         backgroundColor: 'white',
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         borderBottomLeftRadius: 50,
         borderBottomRightRadius: 50,
+        margin: 20, 
+        bottom: 50
     },
-    addBudgetButton: {
+    newBudgetButton: {
         flex: .1,
         backgroundColor: "#fcb401",
         width: 350,
@@ -104,6 +106,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         top: 25
+    },
+    addBudgetButton: {
+        flex: .13,
+        backgroundColor: "#fcb401",
+        width: 350,
+        bottom: 0.5,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     submitButtonText: {
         color: 'white'
@@ -117,6 +131,12 @@ const styles = StyleSheet.create({
         fontSize: 24,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    mediumUp: {
+        fontSize: 36,
+        justifyContent: 'center',
+        alignItems: 'center',
+        bottom: 40
     },
     inner: {
         backgroundColor: '#55D0F1',
