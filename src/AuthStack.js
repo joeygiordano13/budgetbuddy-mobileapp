@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { TextInput, Button, Alert, Text, SafeAreaView, ImageBackground, StyleSheet, Keyboard } from 'react-native';
+import { TextInput, Button, Alert, Text, SafeAreaView, ImageBackground, StyleSheet, Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { buildPath } from './functions/BuildPath';
 import { Center } from './components/Center';
@@ -79,19 +79,25 @@ function Login({navigation}) {
   }
 
   return (
-      <ImageBackground 
+      <SafeAreaView
       style={styles.backgroundImage} 
       source={require('../assets/bubblebackground.png')}>
         <Center>
           <SafeAreaView style={styles.loginBox}>
-            <SafeAreaView style={{left: 45}}>
-              <Button style={styles.submitButton}
-                title="Register"
-                color="#FB2B60"
-                onPress={() => {
-                  navigation.navigate("Register");
-                }}/>
-            </SafeAreaView>
+            <TouchableWithoutFeedback onPress={() => {
+                    navigation.navigate("Register");
+                  }}>
+              <View style={styles.submitButtonn}>
+                <Text style={styles.mediumLeft}>
+                  Register
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => {
+                    navigation.navigate("Login");
+                  }}>
+              <View style={styles.submitButton}><Text style={styles.medium}>Login</Text></View>
+            </TouchableWithoutFeedback>
             <TextInput style={styles.input}
               onChangeText={em => setEmail(em)}
               placeholder="Email"
@@ -105,14 +111,14 @@ function Login({navigation}) {
             color="#FB2B60"
             title="Login"
             onPress={doLogin}/>
-            <Text style={styles.medium}>Forgot Password? Click here.</Text>
+            <Text style={""}>Forgot Password? Click here.</Text>
           </SafeAreaView>
         </Center>
-      </ImageBackground>
+      </SafeAreaView>
   );
 };
 
-function Register() {
+function Register({navigation}) {
   // Register usestates
   const [registerUsername, setUsername] = React.useState('');
   const [registerEmail, setEmail] = React.useState('');
@@ -164,35 +170,58 @@ function Register() {
   }
 
   return (
-    <ImageBackground 
-    style={styles.backgroundImage} 
-    source={require('../assets/bubblebackground.png')}>
+    <SafeAreaView
+    style={styles.backgroundImage} >
       <Center>
-        <SafeAreaView style={styles.loginBox}>
-            <TextInput style={styles.input}
+      <SafeAreaView style={styles.loginBox}>
+          <TouchableWithoutFeedback onPress={() => {
+                  navigation.navigate("Login");
+                }}>
+            <View style={styles.registerButtonn}><Text style={styles.medium}>Login</Text></View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => {
+                  navigation.navigate("Register");
+                }}>
+            <View style={styles.registerButton}>
+              <Text style={styles.medium}>
+                Register
+              </Text>
+            </View>
+          </TouchableWithoutFeedback>
+          </SafeAreaView>
+        <SafeAreaView style={styles.loginBox2}>
+            <Text style={styles.mediumStart}>
+                Username
+            </Text>
+            <TextInput style={styles.input2}
               onChangeText={u => setUsername(u)}
-              placeholder="Username"
               value={registerUsername}></TextInput>
-            <TextInput style={styles.input}
+            <Text style={styles.mediumStart}>
+                Email
+            </Text>
+            <TextInput style={styles.input2}
               onChangeText={em => setEmail(em)}
-              placeholder="Email"
               value={registerEmail}></TextInput>
-            <TextInput style={styles.input}
+            <Text style={styles.mediumStart}>
+                Password
+            </Text>
+            <TextInput style={styles.input2}
               onChangeText={pw => setPassword(pw)}
-              placeholder="Password"
               value={password}></TextInput>
-            <TextInput style={styles.input}
+            <Text style={styles.mediumStart}>
+                Confirm Password
+            </Text>
+            <TextInput style={styles.input2}
               onChangeText={pw => setPasswordConfirm(pw)}
-              placeholder="Confirm Password"
               value={passwordConfirm}></TextInput>
-            <Button style={styles.submitButton}
+            <Button style={styles.submitButton2}
               color="#FB2B60"
               title="Register"
               onPress={doRegistration}/>
             <Text>{message}</Text>
         </SafeAreaView>
       </Center>
-    </ImageBackground>  
+    </SafeAreaView>  
   );
 }
 
@@ -204,18 +233,87 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   input: {
-    margin: 1,
-    height: 40,
-    width: 150,
-    backgroundColor: 'white',
-    borderColor: 'white',
-    borderWidth: 1,
+    flex: 5,
+    margin: 5,
+    height: 20,
+    width: 300,
+    right: 40,
+    backgroundColor: '#55D0F1',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+  },
+  input2: {
+    flex: 0.5,
+    margin: 15,
+    height: 20,
+    width: 300,
+    right: 40,
+    backgroundColor: '#55D0F1',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
   },
   submitButton: {
-    backgroundColor: '#7a42f4',
-    padding: 10,
-    margin: 25,
-    height: 20,
+    flex: 5,
+    backgroundColor: "#fb2b60",
+    width: 150,
+    height: 50,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    fontSize: 50,
+    right: 90,
+    paddingStart: 50,
+    bottom: 195,
+    right: 30
+  },
+  submitButtonn: {
+    flex: 5,
+    backgroundColor: "#55D0F1",
+    width: 325,
+    right: 30,
+    bottom: 131,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  registerButton: {
+    flex: 2,
+    backgroundColor: "#fb2b60",
+    width: 150,
+    bottom: 71,
+    left: 134,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  registerButtonn: {
+    flex: 2,
+    backgroundColor: "#55D0F1",
+    width: 305,
+    height: 50,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    fontSize: 50,
+    right: 20,
+    paddingStart: 50, 
+    marginTop: 30
   },
   submitButtonText: {
     color: 'white'
@@ -224,24 +322,45 @@ const styles = StyleSheet.create({
     fontSize: 28
   },
   medium: {
-    fontSize: 15
-  },
+    fontSize: 24,
+    justifyContent: 'center',
+    alignItems: 'center'
+},
+mediumLeft: {
+  fontSize: 24,
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  left: 60
+},
+mediumStart: {
+  fontSize: 24,
+  justifyContent: 'flex-start',
+  alignItems: 'center'
+},
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
+    backgroundColor: '#19C0FF'
   }, 
   loginBox: {
-    flex: 0.3,
+    flex: .5,
     backgroundColor: "#19c0ff",
     width: 250,
-    borderWidth: 2,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     margin: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingTop: 20
+},
+loginBox2: {
+  flex: 1.4,
+  backgroundColor: "#19c0ff",
+  width: 250,
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  borderBottomLeftRadius: 20,
+  borderBottomRightRadius: 20,
+  bottom: 50
 },
 });
