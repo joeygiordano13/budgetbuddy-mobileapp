@@ -108,7 +108,7 @@ function Login({navigation}) {
             <Text style={styles.mediumStartLogin}>
                 Password
             </Text>
-            <TextInput style={styles.input}
+            <TextInput style={styles.input} secureTextEntry={true}
               onChangeText={pw => setPassword(pw)}
               value={loginPassword}/>
             <TouchableWithoutFeedback onPress={doLogin}>
@@ -203,13 +203,13 @@ function Register({navigation}) {
                 Email
             </Text>
             <TextInput style={styles.input2}
-              onChangeText={em => setEmail(em)}
+              onChangeText={em => setEmail(em)} secureTextEntry={true}
               value={registerEmail}></TextInput>
             <Text style={styles.mediumStart}>
                 Password
             </Text>
             <TextInput style={styles.input2}
-              onChangeText={pw => setPassword(pw)}
+              onChangeText={pw => setPassword(pw)} secureTextEntry={true}
               value={password}></TextInput>
             <Text style={styles.mediumStart}>
                 Confirm Password

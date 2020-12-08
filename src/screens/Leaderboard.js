@@ -1,35 +1,85 @@
 import React, { useContext } from 'react';
 import { Center } from '../components/Center';
-import { View, Text, Button, FlatList, StyleSheet, TextInput, SafeAreaView } from 'react-native';
+import { View, Text, Button, FlatList, StyleSheet, TextInput, TouchableWithoutFeedback, SafeAreaView, ScrollView } from 'react-native';
 import { AuthContext } from '../AuthProvider';
 import { LogoutButton } from '../components/LogoutButton';
-import FriendsTable from '../components/FriendsTable';
-import { Friends } from '../components/Friends';
+import { createStackNavigator } from "@react-navigation/stack";
+import { FontAwesome } from '@expo/vector-icons'; 
+
+
 
 export default function Leaderboard() {
     const [search, setSearch] = React.useState('');
+    const [manage, setManage] = React.useState(false);
+
+    if (! manage )
+        return (
+            <SafeAreaView style={styles.container}>
+                <Center>
+                    <TouchableWithoutFeedback onPress={() => setManage(true)}>
+                        <View style={styles.manageButton}>
+                        <Text style={styles.medium}>
+                            Manage Friends
+                        </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <LogoutButton/>
+                    <SafeAreaView style={styles.friendsTable}>
+                        <ScrollView style={styles.scrollView}>
+                            <SafeAreaView style={styles.friendsHeader}>
+                                <Text style={styles.fHeader}>Friends</Text>
+                            </SafeAreaView>
+                        </ScrollView>
+                    </SafeAreaView>
+                    <SafeAreaView style={styles.globalTable}>
+                        <ScrollView style={styles.scrollView}>
+                            <SafeAreaView style={styles.globalHeader}>
+                                <Text style={styles.fHeader}>Global</Text>
+                            </SafeAreaView>
+                        </ScrollView>
+                    </SafeAreaView>
+                </Center>
+            </SafeAreaView>
+    );
+
     return (
         <SafeAreaView style={styles.container}>
-            <Center>
-                <SafeAreaView style={styles.label}>
-                    <Text style={styles.medium}>Leaderboard</Text>
-                    <FriendsTable/>
-                </SafeAreaView>
-                <SafeAreaView style={styles.label}>
-                    <Text style={styles.medium}>Find Buddies</Text>
-                </SafeAreaView>
-                <SafeAreaView style={styles.middle}>
-                    <TextInput style={styles.input}
-                        onChangeText={s => setSearch(s)}
-                        placeholder="Search for a user..."
-                        value={search}>
-                    </TextInput>
-                </SafeAreaView>
-                <LogoutButton/>
-            </Center>
-        </SafeAreaView>
-    );
+                <Center>
+                    <TouchableWithoutFeedback onPress={() => setManage(false)}>
+                        <View style={styles.saveButton}>
+                        <Text style={styles.medium}>
+                            Save
+                        </Text>
+                        </View>
+                    </TouchableWithoutFeedback> 
+                    <LogoutButton/>
+                    <SafeAreaView style={styles.friendsTableManage}>
+                        <ScrollView style={styles.scrollView}>
+                            <SafeAreaView style={styles.friendsHeader}>
+                                <Text style={styles.fHeader}>Your Friends</Text>
+                            </SafeAreaView>
+                        </ScrollView>
+                    </SafeAreaView>
+                    <SafeAreaView style={styles.globalTableManage}>
+                        <ScrollView style={styles.scrollView}>
+                            <SafeAreaView style={styles.globalHeaderManage}>
+                                <TextInput style={styles.input}
+                                    onChangeText={em => setEmail(em)}
+                                    value={"Search Users!"}>
+                                </TextInput>
+                                <TouchableWithoutFeedback onPress={() => setManage(false)}>
+                                    <View style={styles.searchButton}>
+                                    <FontAwesome name="search" size={40} color="black" />
+                                    </View>
+                                </TouchableWithoutFeedback> 
+                            </SafeAreaView>
+                        </ScrollView>
+                    </SafeAreaView>
+                </Center>
+            </SafeAreaView>
+    )
 }
+
 
 // function Friends() {
 //     const [global, updateGlobal] = React.useState([]);
@@ -76,20 +126,114 @@ export default function Leaderboard() {
 // }
 
 const styles = StyleSheet.create({
+    scrollView: {
+        backgroundColor: 'black',
+        marginHorizontal: 20,
+      },
+      text: {
+        fontSize: 42,
+      },
     container: {
         flex: 1,
         justifyContent: "space-between",
         padding: 20,
         margin: 10,
     },
+    manageButton: {
+        flex: .1,
+        backgroundColor: "#fcb401",
+        width: 350,
+        bottom: 0.5,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 25
+      },
+      saveButton: {
+        flex: .08,
+        backgroundColor: "#fcb401",
+        width: 250,
+        bottom: 0.5,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 25
+      },
+      searchButton: {
+        flex: 1,
+        backgroundColor: "#19c0ff",
+        width: 80,
+        bottom: 15,
+        borderTopRightRadius: 50,
+        borderBottomRightRadius: 50,
+        paddingStart: 25,
+        left: 315
+      },
+    friendsHeader: {
+        backgroundColor: '#fb2b60',
+        width: 414,
+        flex: .2,
+        bottom: 0,
+    },
+    globalHeader: {
+        backgroundColor: '#fcb401',
+        width: 414,
+        flex: .2,
+        bottom: 0,
+    },
+    globalHeaderManage: {
+        backgroundColor: '#fcb401',
+        width: 414,
+        flex: .05,
+        bottom: 45,
+    },
+    fHeader: {
+        fontSize: 48,
+        alignSelf: 'center'
+    },
+    friendsTable: {
+        flex: .4,
+        top: 43,
+        width: 454,
+        bottom: 0
+    },
+    globalTable: {
+        top: 43,
+        flex: .4,
+        width: 454,
+        bottom: 0
+    },
+    friendsTableManage: {
+        flex: .45,
+        top: 43,
+        width: 454,
+        bottom: 0
+    },
+    globalTableManage: {
+        top: 43,
+        flex: .45,
+        width: 454,
+        bottom: 0
+    },
     input: {
+        flex: .8,
         margin: 15,
         height: 40,
-        width: 150,
+        width: 380,
         borderColor: '#7a42f4',
-        borderWidth: 1, 
         backgroundColor: '#fff', 
-        paddingLeft: 7
+        paddingLeft: 7,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        top: 40
     },
     submitButton: {
         backgroundColor: '#7a42f4',

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         marginTop: 5,
         right: 5,
-        top: 25,
+        top: 5,
         position: 'absolute',
     }
 });
