@@ -34,13 +34,13 @@ const Home = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableWithoutFeedback onPress={() => setManage(false)}>
+             <TouchableWithoutFeedback onPress={() => setManage(false)}>
                     <View style={styles.editButton}>
                     <Text style={styles.medium}>
-                        Save
+                        save
                     </Text>
                     </View>
-            </TouchableWithoutFeedback>
+                </TouchableWithoutFeedback>
         </SafeAreaView>
     )
 }
