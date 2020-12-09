@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import { TextInput, Button, Alert, Text, SafeAreaView, ImageBackground, StyleSheet, Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import { TextInput, Button, Alert, Text, SafeAreaView, ImageBackground, StyleSheet, Keyboard, TouchableWithoutFeedback, View, KeyboardAvoidingView } from 'react-native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { buildPath } from './functions/BuildPath';
 import { Center } from './components/Center';
 import { AuthContext } from './AuthProvider';
-import { Card } from 'react-native-paper';
+//import { Card } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
@@ -175,7 +175,7 @@ function Register({navigation}) {
   }
 
   return (
-    <SafeAreaView
+    <KeyboardAvoidingView
     style={styles.backgroundImage} >
       <Center>
       <SafeAreaView style={styles.loginBox}>
@@ -225,7 +225,7 @@ function Register({navigation}) {
             <Text>{message}</Text>
         </SafeAreaView>
       </Center>
-    </SafeAreaView>  
+    </KeyboardAvoidingView>  
   );
 }
 

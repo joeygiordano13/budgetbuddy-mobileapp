@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 //import ReactApexChart from 'react-apexcharts'
 import { Center } from '../components/Center';
-import { SafeAreaView,Text, Button, StyleSheet,  TouchableWithoutFeedback, View, ScrollView, TextInput, Alert } from 'react-native';
+import { SafeAreaView,Text, Button, StyleSheet, Pressable, TouchableWithoutFeedback, View, ScrollView, TextInput, Alert } from 'react-native';
 import { LogoutButton } from '../components/LogoutButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { buildPath } from '../functions/BuildPath';
+//import { ProgressBarAndroid } from '@react-native-community/progress-bar-android';
 import { FontAwesome } from '@expo/vector-icons'; 
 //import * as Progress from 'react-native-progress';
+//import { ProgressBar } from 'react-native-paper';
 
 export default class Budgets extends React.PureComponent {
     constructor(props) {
@@ -19,6 +21,7 @@ export default class Budgets extends React.PureComponent {
             changeAllowance: false, 
             manage: false, 
             editAllowance: false,
+            index: -1
             // budgetName: '', 
             // budgetGoal: -1, 
             // budgetProgress: -1
@@ -138,34 +141,31 @@ export default class Budgets extends React.PureComponent {
             var obj = {BudgetName: newName, BudgetGoal: newGoal,
                 _id:event.currentTarget.getAttribute("data-id")};
             var js = JSON.stringify(obj);
-        
+            var obj2 = {_id:event.currentTarget.getAttribute("data-id")};
+            var js2 = JSON.stringify(obj2);
             try
             {
                 // Call to API
-                const response = await fetch(buildPath('api/updatebudget'),
-                    {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}});
-        
-                // Parsing response
-                var txt = await response.text();
-                var res = JSON.parse(txt);
-        
-                if( res.error.length > 0 )
-                {
-                    Alert.alert( "API Error:" + res.error );
-                }
-                else
-                {
-                    this.setState({index: -1});
-                    this.setState({manage: false});
-                //
-                }
+                Promise.all([
+                    fetch(buildPath('api/updatebudget')),
+                    {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}},
+                    fetch(buildPath('api/addprogress'),
+                    {method:'POST',body:js2,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}})
+                
+                ])
+                .then(([res1, res2]) => {
+                    return Promise.all([res1.json(), res2.json()])
+                })
+                .then(([res1, res2]) => {
+                    this.componentDidMount();
+                    this.setState({index:-1});
+                  })
             }
             catch(e)
             {
-                Alert.alert(e.toString());
+                console.log(e.toString()); 
             }
         }
-
 
 
         const addProgress = async event => {
@@ -191,7 +191,7 @@ export default class Budgets extends React.PureComponent {
                     fetch(buildPath('api/addAllowance'),
                         {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}}),
                         fetch(buildPath('api/addprogress'),
-                        {method:'POST',body:js2,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}})
+                        {method:'POST',body:js2,headers:{'Content-Type': 'application/json'}})
                     ]).then(([res1, res2]) => {
                         return Promise.all([res1.json(), res2.json()])
                     }).then(([res1, res2]) => {
@@ -284,17 +284,50 @@ export default class Budgets extends React.PureComponent {
                         </SafeAreaView>
                         <ScrollView style={styles.scrollView}>
                             {budgets.map((budget,i) => 
-                                <SafeAreaView key={i} style={styles.top}>
-                                    <Text style={styles.medium}>{budget.BudgetName}</Text>
-                                    <SafeAreaView style={styles.inner}>
-                                        <Text style={styles.small}>Goal:</Text>
-                                        <Text style={styles.small}>${budget.BudgetGoal}</Text>
-                                    </SafeAreaView>
-                                    <SafeAreaView style={styles.inner}>
-                                        <Text style={styles.small}>Progress:</Text>
-                                        <Text style={styles.small}>${budget.BudgetProgress}</Text>
-                                    </SafeAreaView>
-                                </SafeAreaView>
+                                    <Pressable onPress={() => this.setState((index == i) ? {index:-1} : {index:i})}> 
+                                        {
+                                        (this.state.index == i) ? 
+                                        (
+                                            <SafeAreaView key={i} style={styles.top}>
+                                                <TextInput style={styles.medium}
+                                                    onChangeText={name => this.setState({budgetName:name})}
+                                                    placeholder={budget.BudgetName}
+                                                />
+                                                <SafeAreaView style={styles.inner}>
+                                                    <TextInput style={styles.input}
+                                                        onChangeText={bg => this.setState({budgetGoal:bg})}
+                                                        placeholder={"Current goal: " + budget.BudgetGoal}
+                                                    />
+                                                </SafeAreaView>
+                                                <SafeAreaView style={styles.inner}>
+                                                    <TextInput style={styles.input}
+                                                        onChangeText={bp => this.setState({budgetProgress:bp})}
+                                                        placeholder={"Current progress: " + budget.BudgetProgress}
+                                                    />
+                                                    <Button
+                                                    color="#fb2b60"
+                                                    title="Save Changes"
+                                                    onPress={Alert.alert("updating budget")}
+                                                    />
+                                                </SafeAreaView>
+                                            </SafeAreaView>
+                                        )
+                                        :
+                                        (
+                                        <SafeAreaView key={i} style={styles.top}>
+                                            <Text style={styles.medium}>{budget.BudgetName}</Text>
+                                            <SafeAreaView style={styles.inner}>
+                                                <Text style={styles.small}>Goal:</Text>
+                                                <Text style={styles.small}>${budget.BudgetGoal}</Text>
+                                            </SafeAreaView>
+                                            <SafeAreaView style={styles.inner}>
+                                                <Text style={styles.small}>Progress:</Text>
+                                                <Text style={styles.small}>${budget.BudgetProgress}</Text>
+                                            </SafeAreaView>
+                                        </SafeAreaView>
+                                        )
+                                        }
+                                    </Pressable>
                             )}
                         </ScrollView>
                         <LogoutButton/>
