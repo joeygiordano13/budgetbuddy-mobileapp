@@ -30,10 +30,6 @@ export const AppTabs = ({}) => {
                         iconName = "leaderboard";
                         return <Icon name="users" size={25} color={tintColor} />
                     }
-                    else if (route.name === "Settings") {
-                        iconName = "settings";
-                        return <Icon name="cogs" size={25} color={tintColor} />
-                    }
                 }
             })}
             tabBarOptions={{
@@ -44,7 +40,6 @@ export const AppTabs = ({}) => {
             <Tabs.Screen name='Home' component={Home} />
             <Tabs.Screen name='Budgets' component={Budgets} />
             <Tabs.Screen name='Leaderboard' component={Leaderboard} />
-            <Tabs.Screen name='Settings' component={Settings} />
         </Tabs.Navigator>
     );
 };

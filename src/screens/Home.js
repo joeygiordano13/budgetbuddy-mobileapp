@@ -44,7 +44,7 @@ export default class Home extends React.PureComponent {
         {
             // API call
             const response = await fetch(buildPath('api/editAccount'),
-                {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")}});
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}});
 
             // Parse JSON response
             var res = JSON.parse(await response.text());

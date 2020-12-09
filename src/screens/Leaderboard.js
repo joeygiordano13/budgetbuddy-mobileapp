@@ -198,7 +198,7 @@ export default class Leaderboard extends React.PureComponent {
                         <SafeAreaView style={styles.globalHeaderManage}>
                         <TextInput style={styles.input}
                                     onChangeText={em => this.setState({query: em})}
-                                    value={query}>
+                                    placeholder={"Search users!!"}>
                         </TextInput> 
                         <TouchableWithoutFeedback onPress={doSearch}>
                                     <View style={styles.searchButton}>
