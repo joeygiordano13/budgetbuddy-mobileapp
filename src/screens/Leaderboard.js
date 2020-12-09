@@ -14,7 +14,9 @@ export default class Leaderboard extends React.PureComponent {
         message: "",
         friends: [],
         leaderBoard: [],
-        manage: false
+        searchResuls: [],
+        manage: false,
+        query: "Search Username!!"
     }
     async componentDidMount() {
         try {
@@ -40,7 +42,84 @@ export default class Leaderboard extends React.PureComponent {
 
     render () {
 
-    const {manage, friends, leaderBoard} = this.state 
+    const {manage, friends, leaderBoard, searchResults, query} = this.state 
+    
+    const doAddFriend = async (id) => {
+        if (id === null || id === undefined) {
+          alert('id is null');
+          return;
+        }
+    
+        var obj = {userID: await AsyncStorage.getItem('userID'), friendID: id};
+        var js = JSON.stringify(obj);
+       try
+        {
+            // API call
+            const response = await fetch(buildPath('api/addFriend'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}});
+    
+            // Parse JSON response
+            var res = JSON.parse(await response.text());
+    
+            this.componentDidMount();
+        }
+        catch(e)
+        {
+            alert(e.toString());
+            return;
+        }
+      }
+
+      const doDeleteFriend = async (id) => {
+        if (id === null || id === undefined) {
+          alert('id is null');
+          return;
+        }
+    
+        var obj = {userID: await AsyncStorage.getItem('userID'), friendID: id};
+        var js = JSON.stringify(obj);
+       try
+        {
+            // API call
+            const response = await fetch(buildPath('api/removeFriend'),
+                {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}});
+    
+            // Parse JSON response
+            var res = JSON.parse(await response.text());
+            this.componentDidMount();
+        }
+        catch(e)
+        {
+            alert(e.toString() + "yess");
+            return;
+        }
+      }
+
+      const doSearch = async event =>
+    {
+        event.preventDefault();
+        var obj = {searchUsername: query, username: await AsyncStorage.getItem("userName")};
+        var js = JSON.stringify(obj);
+
+        try
+        {
+            // API call
+            const response = await fetch(buildPath('api/searchUsers'),
+            {method:'POST', body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}});
+
+            // Parse JSON response
+            var res = JSON.parse(await response.text());
+
+
+            this.setState({searchResults: res.results});
+        }
+        catch(e)
+        {
+            alert(e.toString());
+            return;
+        }
+    };
+
     if (! manage )
         return (
             <SafeAreaView style={styles.container}>
@@ -60,7 +139,7 @@ export default class Leaderboard extends React.PureComponent {
                         <ScrollView style={styles.scrollView}>
                             <View>    
                                 {friends.map((friend, i) => 
-                                <SafeAreaView style={i % 2 == 0 ? styles.lightblueHeader : styles.blueHeader}>
+                                <SafeAreaView key={i} style={i % 2 == 0 ? styles.lightblueHeader : styles.blueHeader}>
                                     <Text style={styles.fHeader}>{friend.username}</Text><Text>{friend.rank} pts</Text>
                                 </SafeAreaView>)
                                 }    
@@ -74,7 +153,7 @@ export default class Leaderboard extends React.PureComponent {
                         <ScrollView style={styles.scrollView}>
                             <View>    
                                 {leaderBoard.map((user, i) => 
-                                <SafeAreaView style={i % 2 == 0 ? styles.lightblueHeader : styles.blueHeader}>
+                                <SafeAreaView key={i} style={i % 2 == 0 ? styles.lightblueHeader : styles.blueHeader}>
                                     <Text style={styles.fHeader}>{user.username}</Text><Text>{user.rank} pts</Text>
                                 </SafeAreaView>)
                                 }    
@@ -87,35 +166,60 @@ export default class Leaderboard extends React.PureComponent {
 
     return (
         <SafeAreaView style={styles.container}>
-                <Center>
+            <Center>
                     <TouchableWithoutFeedback onPress={() => this.setState({manage: false})}>
-                        <View style={styles.saveButton}>
+                        <View style={styles.manageButton}>
                         <Text style={styles.medium}>
                             Save
                         </Text>
                         </View>
-                    </TouchableWithoutFeedback> 
+                    </TouchableWithoutFeedback>
                     <LogoutButton/>
-                    <SafeAreaView style={styles.friendsTableManage}>
+                    <SafeAreaView style={styles.friendsTable}>
+                        <SafeAreaView style={styles.friendsHeader}>
+                            <Text style={styles.fHeader}>Friends</Text>
+                        </SafeAreaView>
                         <ScrollView style={styles.scrollView}>
-                            <SafeAreaView style={styles.friendsHeader}>
-                                <Text style={styles.fHeader}>Your Friends</Text>
-                            </SafeAreaView>
+                            <View>    
+                                {friends.map((friend, i) => 
+                                <SafeAreaView key={i} style={i % 2 == 0 ? styles.lightblueHeader : styles.blueHeader}>
+                                    <Text style={styles.fHeader}>{friend.username}</Text><Text>{friend.rank} pts</Text>
+                                    <TouchableWithoutFeedback onPress={(e) => doDeleteFriend(friend.id)}>
+                                    <View style={styles.addButton}>
+                                    <Text>delete</Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                                </SafeAreaView>)
+                                }    
+                            </View>
                         </ScrollView>
                     </SafeAreaView>
-                    <SafeAreaView style={styles.globalTableManage}>
-                        <ScrollView style={styles.scrollView}>
-                            <SafeAreaView style={styles.globalHeaderManage}>
-                                <TextInput style={styles.input}
-                                    onChangeText={em => setEmail(em)}
-                                    value={"Search Users!"}>
-                                </TextInput>
-                                <TouchableWithoutFeedback onPress={() => setManage(false)}>
+                    <SafeAreaView style={styles.globalTable}>
+                        <SafeAreaView style={styles.globalHeaderManage}>
+                        <TextInput style={styles.input}
+                                    onChangeText={em => this.setState({query: em})}
+                                    value={query}>
+                        </TextInput> 
+                        <TouchableWithoutFeedback onPress={doSearch}>
                                     <View style={styles.searchButton}>
-                                    <FontAwesome name="search" size={40} color="black" />
+                                    <FontAwesome name="search" size={20} color="black" />
                                     </View>
-                                </TouchableWithoutFeedback> 
-                            </SafeAreaView>
+                                </TouchableWithoutFeedback>
+                        </SafeAreaView>
+                        <ScrollView style={styles.scrollView}>
+                            <View>    
+                                {searchResults !== undefined ? searchResults.map((user, i) => 
+                                <SafeAreaView key={i} style={i % 2 == 0 ? styles.lightblueHeader : styles.blueHeader}>
+                                    <Text style={styles.fHeader}>{user.username}</Text><Text>{user.rank} pts</Text>
+
+                                    <TouchableWithoutFeedback id={user.id} onPress={(e) => doAddFriend(user.id)}>
+                                    <View style={styles.addButton}>
+                                    <Text>add</Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                                </SafeAreaView>) : <Text></Text>
+                                }    
+                            </View>
                         </ScrollView>
                     </SafeAreaView>
                 </Center>
@@ -167,14 +271,26 @@ const styles = StyleSheet.create({
         top: 25
       },
       searchButton: {
-        flex: 1,
+        flex: .5,
         backgroundColor: "#19c0ff",
         width: 80,
-        bottom: 15,
+        bottom: 18.6,
         borderTopRightRadius: 50,
         borderBottomRightRadius: 50,
         paddingStart: 25,
-        left: 315
+        left: 345
+      },
+      addButton: {
+        flex: 1,
+        backgroundColor: "#fcb401",
+        width: 48,
+        bottom: 18.6,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        paddingStart: 25,
+        left: 345
       },
     friendsHeader: {
         backgroundColor: '#fb2b60',
@@ -202,9 +318,9 @@ const styles = StyleSheet.create({
     },
     globalHeaderManage: {
         backgroundColor: '#fcb401',
-        width: 414,
-        flex: .05,
-        bottom: 45,
+        width: 434,
+        flex: .28,
+        top: 0,
     },
     fHeader: {
         fontSize: 48,
@@ -223,30 +339,29 @@ const styles = StyleSheet.create({
         bottom: 0
     },
     friendsTableManage: {
-        flex: .45,
+        flex: .38,
         top: 43,
         width: 454,
         bottom: 0
     },
     globalTableManage: {
-        top: 43,
-        flex: .45,
+        flex: .95,
         width: 454,
-        bottom: 0
+        bottom: 50
     },
     input: {
-        flex: .8,
-        margin: 15,
-        height: 40,
-        width: 380,
-        borderColor: '#7a42f4',
-        backgroundColor: '#fff', 
+        flex: .5,
+        left: 50,
+        width: 320,
         paddingLeft: 7,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         borderBottomLeftRadius: 50,
         borderBottomRightRadius: 50,
-        top: 40
+        fontSize: 36,
+        bottom: 0,
+        backgroundColor: 'white',
+        top: 10
     },
     submitButton: {
         backgroundColor: '#7a42f4',
