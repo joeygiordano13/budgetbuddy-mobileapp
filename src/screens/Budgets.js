@@ -74,7 +74,7 @@ export default class Budgets extends React.PureComponent {
             prog = parseInt(budgetProgress);
 
           if (prog > allowance) {
-            Alert.alert("You do not have enough allowance to add that much progress");
+            alert("You do not have enough allowance to add that much progress");
             return;
           }
           var userEmail = await AsyncStorage.getItem("email");
@@ -96,6 +96,7 @@ export default class Budgets extends React.PureComponent {
                   return Promise.all([res1.json(), res2.json()])
                 })
                 .then(([res1, res2]) => {
+                  this.componentDidMount();
                   this.setState({manage:false});
                 })
           }
@@ -211,9 +212,9 @@ export default class Budgets extends React.PureComponent {
                             </Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <ScrollView>
+                        <ScrollView style={styles.scrollView}>
                             {budgets.map((budget,i) => 
-                                <SafeAreaView style={styles.top}>
+                                <SafeAreaView key={i} style={styles.top}>
                                     <Text style={styles.medium}>{budget.BudgetName}</Text>
                                     <SafeAreaView style={styles.inner}>
                                         <Text style={styles.small}>Goal:</Text>
@@ -270,6 +271,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "space-between",
         padding: 15
+    },
+    scrollView: {
+        flex: .8
     },
     newBudgetHeader: {
         backgroundColor: '#fb2b60',

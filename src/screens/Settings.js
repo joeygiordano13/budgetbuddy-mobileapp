@@ -1,19 +1,29 @@
 import React, { useContext } from 'react';
 import { Center } from '../components/Center';
-import { View, Text, Button, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, StyleSheet, SafeAreaView, TextInput } from 'react-native';
 import { AuthContext } from '../AuthProvider';
 
 const Settings = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <Center>
-                <SafeAreaView style={styles.label}>
-                    <Text style={styles.medium}>Change Account Info</Text>
-                </SafeAreaView>
-                <SafeAreaView style={styles.label}>
-                    <Text style={styles.medium}>Change Avatar</Text>
-                </SafeAreaView>
-            </Center>
+             <TouchableWithoutFeedback onPress={() => setManage(false)}>
+                    <View style={styles.saveButton}>
+                    <Text style={styles.medium}>
+                        save
+                    </Text>
+                    </View>
+            </TouchableWithoutFeedback>
+            <Text style={styles.mediumStartLogin}>
+                Email
+            </Text>
+            <TextInput style={styles.input}
+              onChangeText={em => setEmail(em)}>
+            </TextInput>
+            <Text style={styles.mediumStartLogin}>
+                Password
+            </Text>
+            <TextInput style={styles.input} secureTextEntry={true}
+              onChangeText={pw => setPassword(pw)}/>
         </SafeAreaView>
     );
 }
