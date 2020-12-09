@@ -131,7 +131,6 @@ export default class Leaderboard extends React.PureComponent {
                         </Text>
                         </View>
                     </TouchableWithoutFeedback>
-                    <LogoutButton/>
                     <SafeAreaView style={styles.friendsTable}>
                         <SafeAreaView style={styles.friendsHeader}>
                             <Text style={styles.fHeader}>Friends</Text>
@@ -174,7 +173,6 @@ export default class Leaderboard extends React.PureComponent {
                         </Text>
                         </View>
                     </TouchableWithoutFeedback>
-                    <LogoutButton/>
                     <SafeAreaView style={styles.friendsTable}>
                         <SafeAreaView style={styles.friendsHeader}>
                             <Text style={styles.fHeader}>Friends</Text>
