@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //import ReactApexChart from 'react-apexcharts'
 import { Center } from '../components/Center';
-import { SafeAreaView,Text, Button, StyleSheet,  TouchableWithoutFeedback, View, ScrollView, TextInput } from 'react-native';
+import { SafeAreaView,Text, Button, StyleSheet,  TouchableWithoutFeedback, View, ScrollView, TextInput, Alert } from 'react-native';
 import { LogoutButton } from '../components/LogoutButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { buildPath } from '../functions/BuildPath';
@@ -77,6 +77,12 @@ export default class Budgets extends React.PureComponent {
             alert("You do not have enough allowance to add that much progress");
             return;
           }
+
+          if (budgetName == '' || budgetGoal == -1 || budgetProgress == -1) {
+            Alert.alert("You must fill out all fields before submitting a budget.");
+            return;
+          }          
+
           var userEmail = await AsyncStorage.getItem("email");
           var obj = {email:userEmail,BudgetName:budgetName, BudgetGoal:budgetGoal, BudgetProgress:budgetProgress};
           var js = JSON.stringify(obj);
@@ -236,6 +242,12 @@ export default class Budgets extends React.PureComponent {
         return (
             <SafeAreaView style={styles.container}>
                     <Center>
+                        <SafeAreaView>
+                            <Button style={{top: 5, right: 5}}
+                                title="go back"
+                                onPress={() => this.setState({manage:true})}
+                            />
+                        </SafeAreaView>
                         <SafeAreaView style={styles.newBudgetHeader}>
                             <Text style={styles.nBHeader}>Add New Budgets</Text>
                         </SafeAreaView>
