@@ -67,6 +67,7 @@ function Login({navigation}) {
             //console.log("success login email: " + loginEmail + '\n');
             Alert.alert('success login, token: ' + res.accessToken + '\n');
             AsyncStorage.setItem('userID', res.id);
+            AsyncStorage.setItem('email', loginEmail);
             AsyncStorage.setItem('token', res.accessToken);
             AsyncStorage.setItem("userName", res.username)
             login();
