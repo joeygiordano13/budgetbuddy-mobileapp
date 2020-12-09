@@ -3,20 +3,49 @@ import { Center } from '../components/Center';
 import { View, Text, Button, FlatList, StyleSheet, TextInput, TouchableWithoutFeedback, SafeAreaView, ScrollView } from 'react-native';
 import { AuthContext } from '../AuthProvider';
 import { LogoutButton } from '../components/LogoutButton';
-import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome } from '@expo/vector-icons'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { buildPath } from '../functions/BuildPath';
 
 
 
-export default function Leaderboard() {
-    const [search, setSearch] = React.useState('');
-    const [manage, setManage] = React.useState(false);
+export default class Leaderboard extends React.PureComponent {
+    state = {
+        message: "",
+        friends: [],
+        leaderBoard: [],
+        manage: false
+    }
+    async componentDidMount() {
+        try {
+            var objFriend = {userID: await AsyncStorage.getItem('userID')};
+            var jsFriends = JSON.stringify(objFriend);
+            Promise.all([
+            fetch(buildPath('api/get-top-10'),
+            {method:'POST', headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')}}),
+            fetch(buildPath('api/showFriends'),
+                {method:'POST',body:jsFriends,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')}})
+            ]).then(([res1, res2]) => {
+                return Promise.all([res1.json(), res2.json()])
+            }).then(([res1, res2]) => {
+            this.setState({
+                leaderBoard: res1.userArr,
+                friends: res2.friendsArr
+      })
+    })
+        } catch (err) {
+            console.log("ERRRRROO");
+        }
+    }
 
+    render () {
+
+    const {manage, friends, leaderBoard} = this.state 
     if (! manage )
         return (
             <SafeAreaView style={styles.container}>
                 <Center>
-                    <TouchableWithoutFeedback onPress={() => setManage(true)}>
+                    <TouchableWithoutFeedback onPress={() => this.setState({manage: true})}>
                         <View style={styles.manageButton}>
                         <Text style={styles.medium}>
                             Manage Friends
@@ -25,17 +54,31 @@ export default function Leaderboard() {
                     </TouchableWithoutFeedback>
                     <LogoutButton/>
                     <SafeAreaView style={styles.friendsTable}>
+                        <SafeAreaView style={styles.friendsHeader}>
+                            <Text style={styles.fHeader}>Friends</Text>
+                        </SafeAreaView>
                         <ScrollView style={styles.scrollView}>
-                            <SafeAreaView style={styles.friendsHeader}>
-                                <Text style={styles.fHeader}>Friends</Text>
-                            </SafeAreaView>
+                            <View>    
+                                {friends.map((friend, i) => 
+                                <SafeAreaView style={i % 2 == 0 ? styles.lightblueHeader : styles.blueHeader}>
+                                    <Text style={styles.fHeader}>{friend.username}</Text><Text>{friend.rank} pts</Text>
+                                </SafeAreaView>)
+                                }    
+                            </View>
                         </ScrollView>
                     </SafeAreaView>
                     <SafeAreaView style={styles.globalTable}>
+                        <SafeAreaView style={styles.globalHeader}>
+                            <Text style={styles.fHeader}>Global</Text>
+                        </SafeAreaView>
                         <ScrollView style={styles.scrollView}>
-                            <SafeAreaView style={styles.globalHeader}>
-                                <Text style={styles.fHeader}>Global</Text>
-                            </SafeAreaView>
+                            <View>    
+                                {leaderBoard.map((user, i) => 
+                                <SafeAreaView style={i % 2 == 0 ? styles.lightblueHeader : styles.blueHeader}>
+                                    <Text style={styles.fHeader}>{user.username}</Text><Text>{user.rank} pts</Text>
+                                </SafeAreaView>)
+                                }    
+                            </View>
                         </ScrollView>
                     </SafeAreaView>
                 </Center>
@@ -45,7 +88,7 @@ export default function Leaderboard() {
     return (
         <SafeAreaView style={styles.container}>
                 <Center>
-                    <TouchableWithoutFeedback onPress={() => setManage(false)}>
+                    <TouchableWithoutFeedback onPress={() => this.setState({manage: false})}>
                         <View style={styles.saveButton}>
                         <Text style={styles.medium}>
                             Save
@@ -78,57 +121,15 @@ export default function Leaderboard() {
                 </Center>
             </SafeAreaView>
     )
+    }
 }
-
-
-// function Friends() {
-//     const [global, updateGlobal] = React.useState([]);
-//     const [friends, updateFriends] = React.useState([]);
-
-//     // var objFriend = AsyncStorage.getItem('user').param('userID');
-//     // console.log(objFriend);
-//     // Alert.alert('ObjFriend: ' + objFriend);
-//     // //var objFriend = {userID:localStorage.getItem("userID")};
-//     // var jsFriends = JSON.stringify(objFriend);
-//     // Promise.all([
-//     //   fetch(buildPath('api/get-top-10'),
-//     //   {method:'POST', headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + AsyncStorage.getItem("token")}}),
-//     //   fetch(buildPath('api/showFriends'),
-//     //     {method:'POST',body:jsFriends,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + AsyncStorage.getItem("token")}})
-//     // ]).then(([res1, res2]) => {
-//     //      return Promise.all([res1.json(), res2.json()])
-//     //   }).then(([res1, res2]) => {
-//     //       updateGlobal(res1.userArr);
-//     //       updateFriends(res2.friendsArr);
-//     // })
-
-//     updateFriends([{username:"joey"}, {username:"jake"}, {username:"john"}]);
-//     return (
-//         <SafeAreaView style={{flex:1}}>
-//             <SafeAreaView>
-//                 <FlatList
-//                     style={{flex: 1}}
-//                     enableEmptySections={true}
-//                     data={friends}
-//                     keyExtractor={(item) => {
-//                         return item.username;
-//                     }}
-//                     renderItem={({item}) => {
-//                         return (
-//                             <TouchableOpacity>
-//                                 <Text>{item.username}</Text>
-//                             </TouchableOpacity>
-//                         )
-//                     }}/>
-//             </SafeAreaView>
-//         </SafeAreaView>
-//      );
-// }
 
 const styles = StyleSheet.create({
     scrollView: {
-        backgroundColor: 'black',
+        backgroundColor: '#19C0FF',
         marginHorizontal: 20,
+        flex: .1,
+        width: 414
       },
       text: {
         fontSize: 42,
@@ -177,12 +178,24 @@ const styles = StyleSheet.create({
       },
     friendsHeader: {
         backgroundColor: '#fb2b60',
-        width: 414,
-        flex: .2,
+        width: 434,
+        flex: .28,
         bottom: 0,
     },
     globalHeader: {
         backgroundColor: '#fcb401',
+        width: 434,
+        flex: .28,
+        bottom: 0,
+    },
+    lightblueHeader: {
+        backgroundColor: '#19C0FF',
+        width: 414,
+        flex: .2,
+        bottom: 0,
+    },
+    blueHeader: {
+        backgroundColor: '#55D0F1',
         width: 414,
         flex: .2,
         bottom: 0,
