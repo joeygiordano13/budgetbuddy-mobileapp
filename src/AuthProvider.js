@@ -8,14 +8,14 @@ export const AuthContext = React.createContext({
     logout: () => {}
 });
 
-export const AuthProvider = async({ children }) => {
+export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     return <AuthContext.Provider value={{
         user, 
         login: () => {
-            const user = { userID : await AsyncStorage.getItem('userID'),
-                            email : await AsyncStorage.getItem('email'), 
-                            token : await AsyncStorage.getItem('token') }
+            const user = { userID : AsyncStorage.getItem('userID'),
+                            email : AsyncStorage.getItem('email'), 
+                            token : AsyncStorage.getItem('token') }
             setUser({user});
             AsyncStorage.setItem('user', JSON.stringify(user));
         },

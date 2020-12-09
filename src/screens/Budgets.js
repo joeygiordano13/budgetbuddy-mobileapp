@@ -28,7 +28,7 @@ export default class Budgets extends React.PureComponent {
         var js = JSON.stringify(obj);
         Promise.all([
             fetch(buildPath('api/showAllBudgets'),
-            {method:'POST', body: js, headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + AsyncStorage.getItem("token")}}),
+            {method:'POST', body: js, headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}}),
             fetch(buildPath('api/getAllowance'),
                 {method:'POST', body: js, headers: {'Content-Type': 'application/json'}})    
         ])
@@ -204,23 +204,28 @@ export default class Budgets extends React.PureComponent {
                 <SafeAreaView style={styles.container}>
                     <Center>
                         <TouchableWithoutFeedback onPress={() => this.setState({manage:true})}>
-                            <View style={styles.newBudgetButton}>
+                            <View style={styles.top}>
                             <Text style={styles.medium}>
                                 <FontAwesome name="plus" size={24} color="black" /> 
                                     Add new Budgets
                             </Text>
                             </View>
                         </TouchableWithoutFeedback>
-                        <SafeAreaView style={styles.top}>
-                            <Text style={styles.medium}>Budget Name</Text>
-                            <SafeAreaView style={styles.inner}>
-                            </SafeAreaView>
-                        </SafeAreaView>
-                        <SafeAreaView style={styles.middle}>
-                            <Text style={styles.medium}>Budget Name</Text>
-                            <SafeAreaView style={styles.inner}>
-                            </SafeAreaView>
-                        </SafeAreaView>
+                        <ScrollView>
+                            {budgets.map((budget,i) => 
+                                <SafeAreaView style={styles.top}>
+                                    <Text style={styles.medium}>{budget.BudgetName}</Text>
+                                    <SafeAreaView style={styles.inner}>
+                                        <Text style={styles.small}>Goal:</Text>
+                                        <Text style={styles.small}>${budget.BudgetGoal}</Text>
+                                    </SafeAreaView>
+                                    <SafeAreaView style={styles.inner}>
+                                        <Text style={styles.small}>Progress:</Text>
+                                        <Text style={styles.small}>${budget.BudgetProgress}</Text>
+                                    </SafeAreaView>
+                                </SafeAreaView>
+                            )}
+                        </ScrollView>
                         <LogoutButton/>
                     </Center>
                 </SafeAreaView>
@@ -264,8 +269,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "space-between",
-        padding: 20,
-        backgroundColor: '#19C0FF'
+        padding: 15
     },
     newBudgetHeader: {
         backgroundColor: '#fb2b60',
@@ -327,6 +331,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    small: {
+        fontSize: 16,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     mediumUp: {
         fontSize: 36,
         justifyContent: 'center',
@@ -336,6 +345,7 @@ const styles = StyleSheet.create({
     inner: {
         backgroundColor: '#55D0F1',
         flex: 0.80,
+        marginTop: 5,
         width: 350, borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         borderBottomLeftRadius: 20,

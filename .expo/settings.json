@@ -4,6 +4,6 @@
   "lanType": "ip",
   "dev": false,
   "minify": true,
-  "urlRandomness": null,
+  "urlRandomness": "g2-aqx",
   "https": false
 }

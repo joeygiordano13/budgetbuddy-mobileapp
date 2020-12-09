@@ -5,10 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddBudget.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddProgress.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Friends.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendsTable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AuthProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthProvider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Budgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Budgets.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,29 +55,29 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="610" y="353" width="776" height="609" key="AVDManager" timestamp="1607478757663">
+    <state x="638" y="352" width="776" height="609" key="AVDManager" timestamp="1607490100009">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="610" y="353" width="776" height="609" key="AVDManager/72.27.1848.1053@72.27.1848.1053" timestamp="1607478757663" />
-    <state width="1802" height="160" key="GridCell.Tab.0.bottom" timestamp="1607478521632">
+    <state x="638" y="352" width="776" height="609" key="AVDManager/72.27.1848.1053@72.27.1848.1053" timestamp="1607490100009" />
+    <state width="883" height="104" key="GridCell.Tab.0.bottom" timestamp="1607491768610">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="160" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1607478521632" />
-    <state width="1802" height="160" key="GridCell.Tab.0.center" timestamp="1607478521632">
+    <state width="883" height="104" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1607491768610" />
+    <state width="883" height="104" key="GridCell.Tab.0.center" timestamp="1607491768610">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="160" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1607478521632" />
-    <state width="1802" height="160" key="GridCell.Tab.0.left" timestamp="1607478521632">
+    <state width="883" height="104" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1607491768610" />
+    <state width="883" height="104" key="GridCell.Tab.0.left" timestamp="1607491768610">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="160" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1607478521632" />
-    <state width="1802" height="160" key="GridCell.Tab.0.right" timestamp="1607478521632">
+    <state width="883" height="104" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1607491768610" />
+    <state width="883" height="104" key="GridCell.Tab.0.right" timestamp="1607491768610">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="160" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607478521632" />
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607478527214">
+    <state width="883" height="104" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1607491768610" />
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup" timestamp="1607491772331">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607478527214" />
+    <state x="616" y="269" width="672" height="677" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1607491772331" />
   </component>
 </project>
