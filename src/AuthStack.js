@@ -68,6 +68,7 @@ function Login({navigation}) {
             Alert.alert('success login, token: ' + res.accessToken + '\n');
             AsyncStorage.setItem('userID', res.id);
             AsyncStorage.setItem('token', res.accessToken);
+            AsyncStorage.setItem("userName", res.username)
             login();
           }
       }
