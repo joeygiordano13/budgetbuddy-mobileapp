@@ -21,7 +21,6 @@ export default class Budgets extends React.PureComponent {
             rerender: false,
             changeAllowance: false, 
             manage: false, 
-            editAllowance: false,
             index: -1, 
             //newAmount: -1
             budgetName: '', 
@@ -57,7 +56,7 @@ export default class Budgets extends React.PureComponent {
     }
 
     render () {
-        const { budgets, show, manage, editAllowance, currentBudget, budgetName, budgetGoal, budgetProgress, allowance, diff, index, total } = this.state;
+        const { budgets, show, manage, currentBudget, budgetName, budgetGoal, budgetProgress, allowance, diff, index, total } = this.state;
         //const [manage, setManage] = React.useState(false);
 
         var newName = '', newGoal ='';
@@ -250,20 +249,6 @@ export default class Budgets extends React.PureComponent {
                     </SafeAreaView>
             );
         }
-        else if (editAllowance)
-        {
-            return (
-                <SafeAreaView style={styles.container}>
-                    <Center>
-                        <TouchableWithoutFeedback onPress={() => this.setState({editAllowance:false})}>
-                            <View style={styles.addButton}>
-                                <Text>Go Back</Text>
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </Center>
-            </SafeAreaView>
-            );
-        }
         else {
             return (
                 <SafeAreaView style={styles.container}>
@@ -273,14 +258,6 @@ export default class Budgets extends React.PureComponent {
                                 <Text style={styles.large}>
                                     <FontAwesome name="plus" size={24} color="black" />
                                     Add New Budgets
-                                </Text>
-                            </View>
-                        </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => this.setState({editAllowance:true})}>
-                            <View style={styles.addButton}>
-                                <Text style={styles.large}>
-                                    <FontAwesome name="plus" size={24} color="black" />
-                                    Edit Allowance
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
