@@ -2,8 +2,8 @@
   "scheme": null,
   "hostType": "lan",
   "lanType": "ip",
-  "dev": true,
-  "minify": false,
+  "dev": false,
+  "minify": true,
   "urlRandomness": "g2-aqx",
   "https": false
 }

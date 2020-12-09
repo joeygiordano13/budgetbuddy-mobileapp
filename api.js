@@ -17,6 +17,66 @@ exports.setApp = function (app, client ){
 	// }
 	//
 
+    app.post('/api/getAllowance', async (req, res, next) => {
+        var error = '';
+        var allowance = 0;
+    
+        try
+        {
+            // Connecting to the db
+            const db = client.db();
+                
+            const result = await db.collection('users').find({'email': req.param("email")}).toArray();
+            allowance = result[0].funds;
+            // Insert newBudget into db        
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+    
+        // Return: error
+        var ret = {error: error , allowance: allowance};
+        res.status(200).json(ret);
+        //    
+      //  }
+    })
+
+    app.post('/api/addAllowance', async (req, res, next) => {
+       // jwt.verify(req.token, process.env.ACCESS_TOKEN_SECRET, async(err, authData) => {
+        //    if(err){
+                // res.sendStatus(403);
+         //       console.log("Pooop");
+        //res.redirect('http://localhost:3000/');
+        //    } else{
+           //     const accessToken = signToken(authData.user)
+    
+        var error = '';
+    
+        try
+        {
+            // Connecting to the db
+            const db = client.db();
+                
+            const result = await db.collection('users').find({'email': req.param("email")}).toArray();
+    
+            // Insert newBudget into db
+            db.collection('users').updateOne({'email': req.param("email")}, { $set: {funds: req.param("funds")}});
+        }
+        catch(e)
+        {
+            error = e.toString();
+        }
+    
+        // Return: error
+        var ret = {error: error };
+        res.status(200).json(ret);
+    }
+          //    
+      //  }
+    );
+    //}
+
     // Returns: error
     app.post('/api/addbudget', verifyToken, async (req, res, next) =>
     {

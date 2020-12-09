@@ -6,6 +6,7 @@ import { LogoutButton } from '../components/LogoutButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { buildPath } from '../functions/BuildPath';
 import { FontAwesome } from '@expo/vector-icons'; 
+//import * as Progress from 'react-native-progress';
 
 export default class Budgets extends React.PureComponent {
     constructor(props) {
@@ -17,9 +18,10 @@ export default class Budgets extends React.PureComponent {
             rerender: false,
             changeAllowance: false, 
             manage: false, 
-            budgetName: '', 
-            budgetGoal: -1, 
-            budgetProgress: -1
+            editAllowance: false,
+            // budgetName: '', 
+            // budgetGoal: -1, 
+            // budgetProgress: -1
         }
     }
 
@@ -38,19 +40,19 @@ export default class Budgets extends React.PureComponent {
         .then(([res1, res2]) => {
             var total = 0;
             for (var i = 0; i < res1.results.length; i++)
-            total += (res1.results[i].BudgetGoal - res1.results[i].BudgetProgress);
+                total += (res1.results[i].BudgetGoal - res1.results[i].BudgetProgress);
             this.setState({
-            budgets: res1.results,
-            allowance: res2.allowance,
-            diff : 0,
-            index: -1, 
-            total : total
+                budgets: res1.results,
+                allowance: res2.allowance,
+                diff : 0,
+                index: -1, 
+                total : total
             })
         })
     }
 
     render () {
-        const { budgets, show, manage, currentBudget, budgetName, budgetGoal, budgetProgress, allowance, diff, index, total } = this.state;
+        const { budgets, show, manage, editAllowance, currentBudget, budgetName, budgetGoal, budgetProgress, allowance, diff, index, total } = this.state;
         //const [manage, setManage] = React.useState(false);
 
         var newName = '', newGoal ='';
@@ -195,7 +197,6 @@ export default class Budgets extends React.PureComponent {
                     }).then(([res1, res2]) => {
                     this.setState({index: -1});
                     this.setState({manage: false});
-                    //window.location.href = "/budget";
                     })
                 }
                 catch(e)
@@ -205,19 +206,82 @@ export default class Budgets extends React.PureComponent {
             }
 
         //const [manage, setManage] = React.useState(false);
-        if (!manage)
+        if (manage) {
+            return (
+                <SafeAreaView style={styles.container}>
+                        <Center>
+                            <SafeAreaView style={styles.container}>
+                                <TouchableWithoutFeedback onPress={() => this.setState({manage:false})}>
+                                        <View style={styles.addButton}>
+                                            <Text>Go Back</Text>
+                                        </View>
+                                </TouchableWithoutFeedback>        
+                            </SafeAreaView>
+                            <SafeAreaView style={styles.newBudgetHeader}>
+                                <Text style={styles.nBHeader}>Add New Budgets</Text>
+                            </SafeAreaView>
+                            <Text style={styles.mediumUp}>Budget Name</Text>
+                            <TextInput style={styles.input}
+                            onChangeText={bn => this.setState({budgetName : bn})}>
+                            </TextInput>
+                            <Text style={styles.mediumUp}>Budget Goal</Text>
+                            <TextInput style={styles.input}
+                            onChangeText={bg => this.setState({budgetGoal : bg})}>
+                            </TextInput>
+                            <Text style={styles.mediumUp}>Starting Progress</Text>
+                            <TextInput style={styles.input}
+                            onChangeText={pr => this.setState({budgetProgress: pr})}>
+                            </TextInput>
+                            <TouchableWithoutFeedback onPress={addBudget}>
+                            <View style={styles.addBudgetButton}>
+                            <Text style={styles.medium}>
+                                <FontAwesome name="plus" size={24} color="black" /> 
+                                    Add
+                            </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        </Center>
+                    </SafeAreaView>
+            );
+        }
+        else if (editAllowance)
         {
             return (
                 <SafeAreaView style={styles.container}>
                     <Center>
-                        <TouchableWithoutFeedback onPress={() => this.setState({manage:true})}>
-                            <View style={styles.top}>
-                            <Text style={styles.medium}>
-                                <FontAwesome name="plus" size={24} color="black" /> 
-                                    Add new Budgets
-                            </Text>
+                        <TouchableWithoutFeedback onPress={() => this.setState({editAllowance:false})}>
+                            <View style={styles.addButton}>
+                                <Text>Go Back</Text>
                             </View>
                         </TouchableWithoutFeedback>
+                    </Center>
+            </SafeAreaView>
+            );
+        }
+        else {
+            return (
+                <SafeAreaView style={styles.container}>
+                    <Center>
+                        <TouchableWithoutFeedback onPress={() => this.setState({manage:true})}>
+                            <View style={styles.addButton}>
+                                <Text style={styles.large}>
+                                    <FontAwesome name="plus" size={24} color="black" />
+                                    Add New Budgets
+                                </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={() => this.setState({editAllowance:true})}>
+                            <View style={styles.addButton}>
+                                <Text style={styles.large}>
+                                    <FontAwesome name="plus" size={24} color="black" />
+                                    Edit Allowance
+                                </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <SafeAreaView style={styles.allowance}>
+                            <Text style={{fontSize:20}}>Your allowance: ${parseInt(allowance)}</Text>
+                            <Text style={{fontSize: 20}}>Total goal: ${total}</Text>
+                        </SafeAreaView>
                         <ScrollView style={styles.scrollView}>
                             {budgets.map((budget,i) => 
                                 <SafeAreaView key={i} style={styles.top}>
@@ -238,42 +302,6 @@ export default class Budgets extends React.PureComponent {
                 </SafeAreaView>
             );
         }
-
-        return (
-            <SafeAreaView style={styles.container}>
-                    <Center>
-                        <SafeAreaView>
-                            <Button style={{top: 5, right: 5}}
-                                title="go back"
-                                onPress={() => this.setState({manage:true})}
-                            />
-                        </SafeAreaView>
-                        <SafeAreaView style={styles.newBudgetHeader}>
-                            <Text style={styles.nBHeader}>Add New Budgets</Text>
-                        </SafeAreaView>
-                        <Text style={styles.mediumUp}>Budget Name</Text>
-                        <TextInput style={styles.input}
-                        onChangeText={bn => this.setState({budgetName : bn})}>
-                        </TextInput>
-                        <Text style={styles.mediumUp}>Budget Goal</Text>
-                        <TextInput style={styles.input}
-                        onChangeText={bg => this.setState({budgetGoal : bg})}>
-                        </TextInput>
-                        <Text style={styles.mediumUp}>Starting Progress</Text>
-                        <TextInput style={styles.input}
-                        onChangeText={pr => this.setState({budgetProgress: pr})}>
-                        </TextInput>
-                        <TouchableWithoutFeedback onPress={addBudget}>
-                        <View style={styles.addBudgetButton}>
-                        <Text style={styles.medium}>
-                            <FontAwesome name="plus" size={24} color="black" /> 
-                                Add
-                        </Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-                    </Center>
-                </SafeAreaView>
-        );
     }
 }
 
@@ -392,7 +420,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     middle: {
-        flex: 0.4,
+        flex: 0.1,
         backgroundColor: "#19c0ff",
         width: 350,
         borderTopLeftRadius: 20,
@@ -404,6 +432,33 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         top: 40,
     },
+    addButton: {
+        flex: .1,
+        backgroundColor: "#fcb401",
+        width: 350,
+        bottom: 0.5,
+        marginVertical: 2,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 25
+      },
+    allowance: {
+        flex: 0.1,
+        backgroundColor: "#00CC66",
+        width: 350,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        margin: 10,
+        alignItems: 'center',
+        paddingTop: 10,
+        top: 40,
+    }
 });
 
 //export default Budgets;
