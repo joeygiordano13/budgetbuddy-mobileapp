@@ -57,7 +57,7 @@ function Login({navigation}) {
           if( res.error != '')
           {
             //Alert.alert("incorrect login email: " + loginEmail + '\n');
-            Alert.alert('incorrect login, userID: ' + res.id + '\n');
+            //Alert.alert('incorrect login, userID: ' + res.id + '\n');
             console.log('incorrect login email: ' + loginEmail + '\n');
             message = 'Email/Password combination incorrect';
             setAlert(true);
@@ -65,7 +65,7 @@ function Login({navigation}) {
           else
           {
             //console.log("success login email: " + loginEmail + '\n');
-            Alert.alert('success login, token: ' + res.accessToken + '\n');
+            //Alert.alert('success login, token: ' + res.accessToken + '\n');
             AsyncStorage.setItem('userID', res.id);
             AsyncStorage.setItem('email', loginEmail);
             AsyncStorage.setItem('token', res.accessToken);
@@ -75,7 +75,7 @@ function Login({navigation}) {
       }
       catch(e)
       {
-          Alert.alert("failure login email: " + e + "\n");
+          //Alert.alert("failure login email: " + e + "\n");
           return;
       }
   }
