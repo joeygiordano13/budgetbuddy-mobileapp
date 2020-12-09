@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { buildPath } from '../functions/BuildPath';
 //import { ProgressBarAndroid } from '@react-native-community/progress-bar-android';
 import { FontAwesome } from '@expo/vector-icons'; 
+import Icon from "react-native-vector-icons/FontAwesome";
 //import * as Progress from 'react-native-progress';
 //import { ProgressBar } from 'react-native-paper';
 
@@ -150,8 +151,7 @@ export default class Budgets extends React.PureComponent {
                     fetch(buildPath('api/updatebudget')),
                     {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}},
                     fetch(buildPath('api/addprogress'),
-                    {method:'POST',body:js2,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}})
-                
+                    {method:'POST',body:js2,headers:{'Content-Type': 'application/json'}})
                 ])
                 .then(([res1, res2]) => {
                     return Promise.all([res1.json(), res2.json()])
@@ -284,11 +284,29 @@ export default class Budgets extends React.PureComponent {
                         </SafeAreaView>
                         <ScrollView style={styles.scrollView}>
                             {budgets.map((budget,i) => 
-                                    <Pressable onPress={() => this.setState((index == i) ? {index:-1} : {index:i})}> 
+                                    <Pressable onPress={() => this.setState({index:i})}> 
                                         {
                                         (this.state.index == i) ? 
                                         (
                                             <SafeAreaView key={i} style={styles.top}>
+                                                <SafeAreaView style={{left:140}}>
+                                                    <Button
+                                                        title="🗑️"
+                                                        onPress={
+                                                            Alert.alert(
+                                                                "Deleting Budget",
+                                                                "Are you sure?",
+                                                                [
+                                                                {
+                                                                    text: "Cancel",
+                                                                    onPress: () => console.log("Cancel Pressed"),
+                                                                    style: "cancel"
+                                                                },
+                                                                { text: "OK", onPress: () => deleteBudget }
+                                                                ],
+                                                                { cancelable: false }
+                                                            )}/>
+                                                </SafeAreaView>
                                                 <TextInput style={styles.medium}
                                                     onChangeText={name => this.setState({budgetName:name})}
                                                     placeholder={budget.BudgetName}
@@ -307,7 +325,7 @@ export default class Budgets extends React.PureComponent {
                                                     <Button
                                                     color="#fb2b60"
                                                     title="Save Changes"
-                                                    onPress={Alert.alert("updating budget")}
+                                                    onPress={updateBudget}
                                                     />
                                                 </SafeAreaView>
                                             </SafeAreaView>
@@ -406,12 +424,14 @@ const styles = StyleSheet.create({
     medium: {
         fontSize: 24,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center', 
+        paddingLeft: 5
     },
     small: {
         fontSize: 16,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingLeft: 10
     },
     mediumUp: {
         fontSize: 36,
