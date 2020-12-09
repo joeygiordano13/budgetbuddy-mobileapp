@@ -22,10 +22,11 @@ export default class Budgets extends React.PureComponent {
             changeAllowance: false, 
             manage: false, 
             editAllowance: false,
-            index: -1
-            // budgetName: '', 
-            // budgetGoal: -1, 
-            // budgetProgress: -1
+            index: -1, 
+            //newAmount: -1
+            budgetName: '', 
+            budgetGoal: -1, 
+            budgetProgress: -1
         }
     }
 
@@ -93,7 +94,7 @@ export default class Budgets extends React.PureComponent {
           var obj = {email:userEmail,BudgetName:budgetName, BudgetGoal:budgetGoal, BudgetProgress:budgetProgress};
           var js = JSON.stringify(obj);
 
-          var js2 = JSON.stringify({email:userEmail, funds: (parseInt(allowance) - prog)});
+          var js2 = JSON.stringify({email: userEmail, funds: (parseInt(allowance) - prog)});
 
           try
           {
@@ -130,7 +131,7 @@ export default class Budgets extends React.PureComponent {
                 },
                 {
                   label: 'No',
-                  onClick: () => this.setState({show: true, currentBudget: event.currentTarget.getAttribute("data-id")})
+                  onClick: () => this.setState({show: true, currentBudget: budgets[index]._id})
                 }
               ]
             });
@@ -139,24 +140,29 @@ export default class Budgets extends React.PureComponent {
         const updateBudget = async event => {
             event.preventDefault();
     
-            var obj = {BudgetName: newName, BudgetGoal: newGoal,
-                _id:event.currentTarget.getAttribute("data-id")};
+            var obj = {BudgetName: budgetName, BudgetGoal: budgetGoal,_id:budgets[index].id};
             var js = JSON.stringify(obj);
-            var obj2 = {_id:event.currentTarget.getAttribute("data-id")};
+            var obj2 = {_id:budgets[index]._id, newAmount: budgetProgress};
             var js2 = JSON.stringify(obj2);
+            var obj3 = {funds: allowance - (budgetProgress - budgets[index].BudgetProgress), email: await AsyncStorage.getItem('email')};
+            var js3 = JSON.stringify(obj3);
             try
             {
                 // Call to API
                 Promise.all([
-                    fetch(buildPath('api/updatebudget')),
-                    {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}},
+                    fetch(buildPath('api/updatebudget'),
+                    {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}}),
                     fetch(buildPath('api/addprogress'),
-                    {method:'POST',body:js2,headers:{'Content-Type': 'application/json'}})
+                    {method:'POST',body:js2,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}}),
+                    fetch(buildPath('api/addAllowance'),
+                    {method:'POST',body:js3,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}})
+                    //fetch(buildPath)
+                    
                 ])
-                .then(([res1, res2]) => {
-                    return Promise.all([res1.json(), res2.json()])
+                .then(([res1, res2, res3]) => {
+                    return Promise.all([res1.json(), res2.json(), res3.json()])
                 })
-                .then(([res1, res2]) => {
+                .then(([res1, res2, res3]) => {
                     this.componentDidMount();
                     this.setState({index:-1});
                   })
@@ -181,7 +187,7 @@ export default class Budgets extends React.PureComponent {
             var js = JSON.stringify(obj);
       
             const obj2 = {newAmount: budgets[index].BudgetProgress,
-              _id:event.currentTarget.getAttribute("data-id")};
+              _id:budgets[index]._id};
             const js2 = JSON.stringify(obj2);
       
                 try
@@ -191,7 +197,7 @@ export default class Budgets extends React.PureComponent {
                     fetch(buildPath('api/addAllowance'),
                         {method:'POST',body:js,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}}),
                         fetch(buildPath('api/addprogress'),
-                        {method:'POST',body:js2,headers:{'Content-Type': 'application/json'}})
+                        {method:'POST',body:js2,headers:{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + await AsyncStorage.getItem("token")}})
                     ]).then(([res1, res2]) => {
                         return Promise.all([res1.json(), res2.json()])
                     }).then(([res1, res2]) => {
@@ -292,20 +298,7 @@ export default class Budgets extends React.PureComponent {
                                                 <SafeAreaView style={{left:140}}>
                                                     <Button
                                                         title="🗑️"
-                                                        onPress={
-                                                            Alert.alert(
-                                                                "Deleting Budget",
-                                                                "Are you sure?",
-                                                                [
-                                                                {
-                                                                    text: "Cancel",
-                                                                    onPress: () => console.log("Cancel Pressed"),
-                                                                    style: "cancel"
-                                                                },
-                                                                { text: "OK", onPress: () => deleteBudget }
-                                                                ],
-                                                                { cancelable: false }
-                                                            )}/>
+                                                        onPress={remove}/>
                                                 </SafeAreaView>
                                                 <TextInput style={styles.medium}
                                                     onChangeText={name => this.setState({budgetName:name})}
@@ -348,7 +341,6 @@ export default class Budgets extends React.PureComponent {
                                     </Pressable>
                             )}
                         </ScrollView>
-                        <LogoutButton/>
                     </Center>
                 </SafeAreaView>
             );
